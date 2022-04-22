@@ -1,1 +1,1 @@
-spring:  datasource:    url: jdbc:mysql://localhost/secretariartc?useTimezone=true&serverTimezone=UTC    username: root    password: C0nnect123    driver-class-name: com.mysql.cj.jdbc.Driver  liquibase:    change-log: classpath:/db/changelog/db.changelog-master.yaml
+spring:  datasource:    url: jdbc:${DATABASE_URL}    username: ${USER}    password: ${PASSWORD}    driver-class-name: com.mysql.cj.jdbc.Driver  liquibase:    change-log: classpath:/db/changelog/db.changelog-master.yaml
