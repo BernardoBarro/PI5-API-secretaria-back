@@ -6,18 +6,18 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="01_create_sc_seller" author="921712">
+	<changeSet id="02_create_cargo" author="joao">
 		<sql>
-			CREATE TABLE pessoa (
-			    id bigint NOT NULL,
-			    nome varchar(255) NOT NULL,
-			    CONSTRAINT id_pkey PRIMARY KEY (id)
-			);
+			CREATE TABLE CARGO(
+			IdCargo INT NOT NULL AUTO_INCREMENT,
+			DescricaoCargo VARCHAR(2000),
+			PRIMARY KEY (IdCargo)
+			); 
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE pessoa;
+				DROP TABLE CARGO;
 			</sql>
 		</rollback>
 	</changeSet>

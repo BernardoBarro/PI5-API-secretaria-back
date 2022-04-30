@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="08_create_statusprojeto" author="joao">
+		<sql>
+			CREATE TABLE StatusProjeto (
+    		IdStatusProjeto INT NOT NULL AUTO_INCREMENT,
+   			IdProjeto INT,
+    		StatusProjeto CHAR,	
+    		PRIMARY KEY (IdStatusProjeto)
+			);
+
+		</sql>
+		<rollback>
+			<sql>
+				DROP TABLE STATUSPROJETO;
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

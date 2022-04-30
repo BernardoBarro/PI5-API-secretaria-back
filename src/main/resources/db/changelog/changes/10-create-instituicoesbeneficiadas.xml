@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="10_create_instituicoesbeneficiadas" author="joao">
+		<sql>
+			CREATE TABLE InstituicoesBeneficiadas (
+    			IdInstituicao INT NOT NULL AUTO_INCREMENT,
+    			NomeInstituicao VARCHAR(50),
+    			Contato VARCHAR(11),
+    			PRIMARY KEY (IdInstituicao)
+			);
+
+		</sql>
+		<rollback>
+			<sql>
+				DROP TABLE INSTITUICOESBENEFICIADAS;
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>
