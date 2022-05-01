@@ -9,9 +9,9 @@
 	<changeSet id="02_create_cargo" author="joao">
 		<sql>
 			CREATE TABLE CARGO(
-			IdCargo INT NOT NULL AUTO_INCREMENT,
-			DescricaoCargo VARCHAR(2000),
-			PRIMARY KEY (IdCargo)
+			id_cargo bigint NOT NULL AUTO_INCREMENT,
+			descricao_cargo varchar(255),
+			PRIMARY KEY (id_cargo)
 			); 
 
 		</sql>

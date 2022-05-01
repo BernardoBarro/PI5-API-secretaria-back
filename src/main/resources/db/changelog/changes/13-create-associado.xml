@@ -9,22 +9,23 @@
 	<changeSet id="13_create_associado" author="joao">
 		<sql>
 			CREATE TABLE ASSOCIADO (
-			IdAssociado INT NOT NULL AUTO_INCREMENT,
+			id_associado bigint NOT NULL AUTO_INCREMENT,
 			IdReuniao INT,
 			IdVotacao INT,
 			IdAcesso INT,
 			IdStatus INT,
-			IdCargo INT,
-			IdPessoa INT,
-			DataAdmissao DATE,
-			Padrinho VARCHAR(50),
-    			Historico VARCHAR(2000),
-			ConselhoDiretor BOOLEAN,	
-			PRIMARY KEY (IdAssociado),
+			id_cargo bigint,
+			id_pessoa bigint,
+			data_admissao DATE,
+			padrinho VARCHAR(50),
+   			historico VARCHAR(2000),
+   			restricao_medica VARCHAR(255),
+			conselho_diretor BOOLEAN,	
+			PRIMARY KEY (id_associado),
 			FOREIGN KEY (IdStatus) REFERENCES Status(IdStatus) ON UPDATE CASCADE ON DELETE CASCADE,
-			FOREIGN KEY (IdCargo) REFERENCES Cargo(IdCargo) ON UPDATE CASCADE ON DELETE CASCADE,
+			FOREIGN KEY (id_cargo) REFERENCES Cargo(id_cargo) ON UPDATE CASCADE ON DELETE CASCADE,
 			FOREIGN KEY (IdAcesso) REFERENCES Acesso(IdAcesso) ON UPDATE CASCADE ON DELETE CASCADE,
-			FOREIGN KEY (IdPessoa) REFERENCES Pessoa(IdPessoa) ON UPDATE CASCADE ON DELETE CASCADE,
+			FOREIGN KEY (id_pessoa) REFERENCES Pessoa(id_pessoa) ON UPDATE CASCADE ON DELETE CASCADE,
 			FOREIGN KEY (IdReuniao) REFERENCES Reuniao(IdReuniao) ON UPDATE CASCADE ON DELETE CASCADE,
 			FOREIGN KEY (IdVotacao) references Votacao(IdVotacao) ON UPDATE CASCADE ON DELETE CASCADE
 			);

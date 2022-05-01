@@ -9,15 +9,17 @@
 	<changeSet id="07_create_pessoa" author="joao">
 		<sql>
 			CREATE TABLE PESSOA (
-			IdPessoa INT NOT NULL AUTO_INCREMENT,
-			IdEndereco INT, 
-			Nome VARCHAR(50),
-			Email VARCHAR(50),
-			Telefone VARCHAR(11),
-			Cpf VARCHAR(11),
-			Senha VARCHAR(25),
-			PRIMARY KEY (IdPessoa),
-			FOREIGN KEY (IdEndereco) REFERENCES Endereco(IdEndereco) ON UPDATE CASCADE ON DELETE CASCADE
+			id_pessoa bigint NOT NULL AUTO_INCREMENT,
+			id_endereco bigint, 
+			nome VARCHAR(50),
+			email VARCHAR(50),
+			data_nascimento TIMESTAMP,
+			telefone VARCHAR(11),
+			ocupacao VARCHAR(50),
+			cpf VARCHAR(11),
+			senha VARCHAR(25),
+			PRIMARY KEY (id_pessoa),
+			FOREIGN KEY (id_endereco) REFERENCES Endereco(id_endereco) ON UPDATE CASCADE ON DELETE CASCADE
 			);
 
 		</sql>
