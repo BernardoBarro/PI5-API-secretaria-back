@@ -6,18 +6,21 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="02_create_cargo" author="joao">
+	<changeSet id="03_create_acesso" author="joao">
 		<sql>
-			CREATE TABLE CARGO(
-			IdCargo INT NOT NULL AUTO_INCREMENT,
-			DescricaoCargo VARCHAR(2000),
-			PRIMARY KEY (IdCargo)
-			); 
+			CREATE TABLE ACESSO (
+	ID_ACESSO BIGINT NOT NULL AUTO_INCREMENT,
+	ID_ASSOCIADO BIGINT,
+	ID_CARGO BIGINT,
+	TIPO_ACESSO CHAR,
+	PRIMARY KEY (ID_ACESSO),
+	FOREIGN KEY (ID_CARGO) REFERENCES CARGO(ID_CARGO) ON UPDATE CASCADE ON DELETE CASCADE
+); 
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE CARGO;
+				DROP TABLE ACESSO;
 			</sql>
 		</rollback>
 	</changeSet>
