@@ -6,19 +6,20 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="03_create_acesso" author="joao">
+	<changeSet id="05_create_votacao" author="joao">
 		<sql>
-			CREATE TABLE ACESSO (
-			IdAcesso INT NOT NULL AUTO_INCREMENT,
-			IdAssociado INT,
-			TipoAcesso CHAR,
-			PRIMARY KEY (IdAcesso)
-			); 
+CREATE TABLE VOTACAO (
+    ID_VOTACAO BIGINT NOT NULL AUTO_INCREMENT,
+    ID_CONVIDADO BIGINT,
+    NOME VARCHAR(200),
+    PRIMARY KEY (ID_VOTACAO),
+    FOREIGN KEY (ID_CONVIDADO) REFERENCES CONVIDADO(ID_CONVIDADO) ON UPDATE CASCADE ON DELETE CASCADE
+); 
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE ACESSO;
+				DROP TABLE VOTACAO;
 			</sql>
 		</rollback>
 	</changeSet>

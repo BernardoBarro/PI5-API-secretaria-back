@@ -6,20 +6,29 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="05_create_votacao" author="joao">
+	<changeSet id="07_create_pessoa" author="joao">
 		<sql>
-			CREATE TABLE Votacao (
-    			IdVotacao INT NOT NULL AUTO_INCREMENT,
-   			IdConvidado INT,
-    			Nome VARCHAR(200),
-    			PRIMARY KEY (IdVotacao),
-    			FOREIGN KEY (IdConvidado) REFERENCES Convidado(IdConvidado) ON UPDATE CASCADE ON DELETE CASCADE
-			); 
+		CREATE TABLE PESSOA (
+	ID_PESSOA BIGINT NOT NULL AUTO_INCREMENT,
+	ID_ENDERECO BIGINT, 
+	NOME VARCHAR(50),
+	GENERO CHAR(1),
+	OCUPACAO VARCHAR(25),
+	DATA_NASCIMENTO DATE,
+	RESTRICOES_MEDICAS VARCHAR(50),
+    EMAIL VARCHAR(50),
+    TELEFONE VARCHAR(11),
+    CPF VARCHAR(11),
+    NOME_CRACHA VARCHAR(50),
+    SENHA VARCHAR(25),
+	PRIMARY KEY (ID_PESSOA),
+	FOREIGN KEY (ID_ENDERECO) REFERENCES ENDERECO(ID_ENDERECO) ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE VOTACAO;
+				DROP TABLE PESSOA;
 			</sql>
 		</rollback>
 	</changeSet>

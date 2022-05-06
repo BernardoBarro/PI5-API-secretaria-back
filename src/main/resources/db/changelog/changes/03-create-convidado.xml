@@ -6,23 +6,20 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="12_create_reuniao" author="joao">
+	<changeSet id="04_create_convidado" author="joao">
 		<sql>
-			CREATE TABLE Reuniao (
-    			IdReuniao INT NOT NULL AUTO_INCREMENT,
-    			IdProjeto INT,
-    			IdAssociado INT,
-    			DataReuniao TIMESTAMP,
-    			Assunto VARCHAR(1000),
-    			Local VARCHAR(200),
-    			PRIMARY KEY (IdReuniao),
-    			FOREIGN KEY (IdProjeto) REFERENCES Projeto(IdProjeto) ON UPDATE CASCADE ON DELETE CASCADE
-			); 
+		CREATE TABLE CONVIDADO (
+    ID_CONVIDADO BIGINT NOT NULL AUTO_INCREMENT,
+    ID_VOTACAO BIGINT,
+    CONTATO VARCHAR(50),
+    NOME VARCHAR(50),
+    PRIMARY KEY (ID_CONVIDADO)
+); 
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE REUNIAO;
+				DROP TABLE CONVIDADO;
 			</sql>
 		</rollback>
 	</changeSet>

@@ -8,13 +8,13 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 	<changeSet id="09_create_patrocinador" author="joao">
 		<sql>
-				CREATE TABLE Patrocinador (
-    			IdPatrocinador INT NOT NULL AUTO_INCREMENT,
-    			Valor DECIMAL(15,2),
-    			Descricao VARCHAR(2000),
-    			NomePatrocinador VARCHAR(50),
-     			PRIMARY KEY (IdPatrocinador)
-			);
+			CREATE TABLE PATROCINADOR (
+    ID_PATROCINADOR BIGINT NOT NULL AUTO_INCREMENT,
+    VALOR DECIMAL(15,2),
+    DESCRICAO VARCHAR(2000),
+    NOME_PATROCINADOR VARCHAR(50),
+     PRIMARY KEY (ID_PATROCINADOR)
+);
 
 		</sql>
 		<rollback>
