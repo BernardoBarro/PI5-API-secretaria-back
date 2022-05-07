@@ -11,7 +11,7 @@
 			CREATE TABLE Projeto (
    			IdProjeto INT NOT NULL AUTO_INCREMENT,
     			IdPatrocinador INT,
-    			IdInstituicao INT,
+    			id_instituicao INT,
     			IdStatusProjeto INT,
     			DescricaoProjeto VARCHAR(5000),
     			DataInicio TIMESTAMP,
@@ -19,7 +19,7 @@
     			PRIMARY KEY (IdProjeto),
     			FOREIGN KEY (IdStatusProjeto) REFERENCES StatusProjeto(IdStatusProjeto) ON UPDATE CASCADE ON DELETE CASCADE,
 			FOREIGN KEY (IdPatrocinador) REFERENCES Patrocinador(IdPatrocinador) ON UPDATE CASCADE ON DELETE CASCADE,
-			FOREIGN KEY (IdInstituicao) REFERENCES InstituicoesBeneficiadas(IdInstituicao) ON UPDATE CASCADE ON DELETE CASCADE
+			FOREIGN KEY (id_instituicao) REFERENCES InstituicoesBeneficiadas(id_instituicao) ON UPDATE CASCADE ON DELETE CASCADE
     			);
 
 		</sql>
