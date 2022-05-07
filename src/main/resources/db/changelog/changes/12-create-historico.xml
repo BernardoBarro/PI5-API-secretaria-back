@@ -6,20 +6,22 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="09_create_patrocinador" author="joao">
+	<changeSet id="14_create_historico" author="joao">
 		<sql>
-				CREATE TABLE Patrocinador (
-    			IdPatrocinador INT NOT NULL AUTO_INCREMENT,
-    			Valor DECIMAL(15,2),
-    			Descricao VARCHAR(2000),
-    			NomePatrocinador VARCHAR(50),
-     			PRIMARY KEY (IdPatrocinador)
-			);
+			CREATE TABLE HISTORICO (
+    ID_HISTORICO BIGINT NOT NULL AUTO_INCREMENT,
+    ID_CARGO BIGINT,
+    ID_ASSOCIADO BIGINT,
+    ANO YEAR,
+    PRIMARY KEY (ID_HISTORICO),
+	FOREIGN KEY (ID_CARGO) REFERENCES CARGO(ID_CARGO) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (ID_ASSOCIADO) REFERENCES ASSOCIADO(ID_ASSOCIADO) ON UPDATE CASCADE ON DELETE CASCADE
+);
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE PATROCINADOR;
+				DROP TABLE HISTORICO;
 			</sql>
 		</rollback>
 	</changeSet>

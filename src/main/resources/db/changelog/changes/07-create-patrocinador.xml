@@ -6,20 +6,20 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="05_create_votacao" author="joao">
+	<changeSet id="09_create_patrocinador" author="joao">
 		<sql>
-			CREATE TABLE Votacao (
-    			IdVotacao INT NOT NULL AUTO_INCREMENT,
-   			IdConvidado INT,
-    			Nome VARCHAR(200),
-    			PRIMARY KEY (IdVotacao),
-    			FOREIGN KEY (IdConvidado) REFERENCES Convidado(IdConvidado) ON UPDATE CASCADE ON DELETE CASCADE
-			); 
+			CREATE TABLE PATROCINADOR (
+    ID_PATROCINADOR BIGINT NOT NULL AUTO_INCREMENT,
+    VALOR DECIMAL(15,2),
+    DESCRICAO VARCHAR(2000),
+    NOME_PATROCINADOR VARCHAR(50),
+     PRIMARY KEY (ID_PATROCINADOR)
+);
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE VOTACAO;
+				DROP TABLE PATROCINADOR;
 			</sql>
 		</rollback>
 	</changeSet>
