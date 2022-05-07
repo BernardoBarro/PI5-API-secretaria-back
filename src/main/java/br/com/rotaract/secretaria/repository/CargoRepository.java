@@ -8,4 +8,6 @@ import br.com.rotaract.secretaria.model.Cargo;
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo, Long>{
 
+	Cargo findByNome(String descricao);
+
 }

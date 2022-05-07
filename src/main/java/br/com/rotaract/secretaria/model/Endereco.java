@@ -28,9 +28,6 @@ public class Endereco {
 	@Column(name = "rua")
 	private String rua;
 
-	@Column(name = "complemento")
-	private String complemento;
-
 	@Column(name = "cep")
 	private String cep;
 
@@ -65,14 +62,6 @@ public class Endereco {
 
 	public void setRua(String rua) {
 		this.rua = rua;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
 	}
 
 	public String getCep() {

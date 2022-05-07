@@ -28,20 +28,29 @@ public class Pessoa {
 	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "email")
-	private String email;
-
-	@Column(name = "data_nascimento")
-	private LocalDateTime nascimento;
-
-	@Column(name = "telefone")
-	private String telefone;
+	@Column(name = "genero")
+	private String genero;
 
 	@Column(name = "ocupacao")
 	private String ocupacao;
 
+	@Column(name = "data_nascimento")
+	private LocalDateTime nascimento;
+
+	@Column(name = "restricoes_medicas")
+	private String restricoesMedicas;
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "telefone")
+	private String telefone;
+
 	@Column(name = "cpf")
 	private String cpf;
+
+	@Column(name = "nome_cracha")
+	private String cracha;
 
 	@Column(name = "senha")
 	private String senha;
@@ -69,28 +78,12 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public LocalDateTime getNascimento() {
-		return nascimento;
-	}
-
-	public void setNascimento(LocalDateTime nascimento) {
-		this.nascimento = nascimento;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
 	public String getOcupacao() {
@@ -101,12 +94,52 @@ public class Pessoa {
 		this.ocupacao = ocupacao;
 	}
 
+	public LocalDateTime getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(LocalDateTime nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	public String getRestricoesMedicas() {
+		return restricoesMedicas;
+	}
+
+	public void setRestricoesMedicas(String restricoesMedicas) {
+		this.restricoesMedicas = restricoesMedicas;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getCracha() {
+		return cracha;
+	}
+
+	public void setCracha(String cracha) {
+		this.cracha = cracha;
 	}
 
 	public String getSenha() {

@@ -3,6 +3,7 @@ package br.com.rotaract.secretaria.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.rotaract.secretaria.constant.StatusAssociado;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.model.Cargo;
@@ -32,26 +33,24 @@ public class AssociadoService {
 		enderecoRepository.save(endereco);
 		
 		Pessoa pessoa = new Pessoa();
-		pessoa.setTelefone(associadoDto.getTelefone());
 		pessoa.setNome(associadoDto.getNome());
+		pessoa.setGenero(associadoDto.getGenero());
+		pessoa.setOcupacao(associadoDto.getOcupacao());
 		pessoa.setNascimento(associadoDto.getNascimento());
 		pessoa.setEmail(associadoDto.getEmail());
-		pessoa.setCpf(associadoDto.getCpf());
-		pessoa.setOcupacao(associadoDto.getOcupacao());
+		pessoa.setTelefone(associadoDto.getTelefone());
+		pessoa.setSenha(associadoDto.getSenha());
 		pessoa.setEndereco(endereco);
 		
 		pessoaRepository.save(pessoa);
 		
-		Cargo cargo = new Cargo();
-		cargo.setNome(associadoDto.getCargo().getDescricao());
-		
-		cargoRepository.save(cargo);
+		Cargo cargo = cargoRepository.findByNome(associadoDto.getCargo().getDescricao());
 		
 		Associado associado = new Associado();
 		associado.setRI(associadoDto.getRI());
-		associado.setRestricaoMedica(associadoDto.getRestricaoMedica());
-		associado.setPadrinho(associadoDto.getPadrinho());
+		associado.setStatus(StatusAssociado.ATIVO);
 		associado.setDataAdmissao(associadoDto.getAdmissao());
+		associado.setPadrinho(associadoDto.getPadrinho());
 		associado.setPessoa(pessoa);
 		associado.setCargo(cargo);
 		

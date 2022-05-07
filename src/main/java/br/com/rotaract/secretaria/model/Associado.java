@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.rotaract.secretaria.constant.StatusAssociado;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -22,20 +23,14 @@ public class Associado {
 	@Column(name = "id_associado")
 	private Long RI;
 
+	@Column(name = "status_associado")
+	private StatusAssociado status;
+
 	@Column(name = "data_admissao")
 	private LocalDateTime dataAdmissao;
 
 	@Column(name = "padrinho")
 	private String padrinho;
-
-	@Column(name = "historico")
-	private String historico;
-
-	@Column(name = "restricao_medica")
-	private String restricaoMedica;
-
-	@Column(name = "conselho_diretor")
-	private boolean conselhoDiretor;
 
 	@OneToOne
 	@JoinColumn(name = "id_pessoa", nullable = false)
@@ -53,6 +48,14 @@ public class Associado {
 		RI = rI;
 	}
 
+	public StatusAssociado getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusAssociado ativo) {
+		this.status = ativo;
+	}
+
 	public LocalDateTime getDataAdmissao() {
 		return dataAdmissao;
 	}
@@ -67,30 +70,6 @@ public class Associado {
 
 	public void setPadrinho(String padrinho) {
 		this.padrinho = padrinho;
-	}
-
-	public String getHistorico() {
-		return historico;
-	}
-
-	public void setHistorico(String historico) {
-		this.historico = historico;
-	}
-
-	public String getRestricaoMedica() {
-		return restricaoMedica;
-	}
-
-	public void setRestricaoMedica(String restricaoMedica) {
-		this.restricaoMedica = restricaoMedica;
-	}
-
-	public boolean isConselhoDiretor() {
-		return conselhoDiretor;
-	}
-
-	public void setConselhoDiretor(boolean conselhoDiretor) {
-		this.conselhoDiretor = conselhoDiretor;
 	}
 
 	public Pessoa getPessoa() {
