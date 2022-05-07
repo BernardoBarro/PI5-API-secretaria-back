@@ -8,13 +8,13 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 	<changeSet id="04_create_convidado" author="joao">
 		<sql>
-			CREATE TABLE Convidado (
-    			IdConvidado INT NOT NULL AUTO_INCREMENT,
-    			IdVotacao INT,
-    			Contato VARCHAR(50),
-    			Nome VARCHAR(50),
-    			PRIMARY KEY (IdConvidado)
-			); 
+			CREATE TABLE CONVIDADO (
+		    ID_CONVIDADO BIGINT NOT NULL AUTO_INCREMENT,
+		    ID_VOTACAO BIGINT,
+		    CONTATO VARCHAR(50),
+		    NOME VARCHAR(50),
+		    PRIMARY KEY (ID_CONVIDADO)
+		); 
 
 		</sql>
 		<rollback>
