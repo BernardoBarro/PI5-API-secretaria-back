@@ -19,11 +19,15 @@
 		insert into CARGO(DESCRICAO_CARGO) values ('Secretário');
 		insert into CARGO(DESCRICAO_CARGO) values ('Tesoureiro');
 		insert into CARGO(DESCRICAO_CARGO) values ('Protocolo');
-		insert into CARGO(DESCRICAO_CARGO) values ('Comunidades');
+		insert into CARGO(DESCRICAO_CARGO) values ('Comunidade');
 		insert into CARGO(DESCRICAO_CARGO) values ('Internos');
 		insert into CARGO(DESCRICAO_CARGO) values ('Imagem Pública');
 		insert into CARGO(DESCRICAO_CARGO) values ('Finanças');
 		insert into CARGO(DESCRICAO_CARGO) values ('Internacionais');
+		insert into CARGO(DESCRICAO_CARGO) values ('DQA');
+		insert into CARGO(DESCRICAO_CARGO) values ('Jurídico');
+		insert into CARGO(DESCRICAO_CARGO) values ('Diversidade, Equidade e Inclusão');
+		insert into CARGO(DESCRICAO_CARGO) values ('Profissionais');
 		</sql>
 		<rollback>
 			<sql>
