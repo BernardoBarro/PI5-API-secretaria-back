@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -59,6 +61,7 @@ public class Pessoa {
 	@JoinColumn(name = "id_endereco", nullable = false)
 	private Endereco endereco;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "pessoa")
 	private Associado associado;
 
