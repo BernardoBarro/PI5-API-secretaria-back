@@ -9,20 +9,25 @@
 	<changeSet id="02_create_cargo" author="joao">
 		<sql>
 			CREATE TABLE CARGO(
-	ID_CARGO BIGINT NOT NULL AUTO_INCREMENT,
-	DESCRICAO_CARGO VARCHAR(2000),
-	PRIMARY KEY (ID_CARGO)
-); 
-insert into CARGO(DESCRICAO_CARGO) values ('Presidente');
-insert into CARGO(DESCRICAO_CARGO) values ('Vice-Presidente');
-insert into CARGO(DESCRICAO_CARGO) values ('Secretário');
-insert into CARGO(DESCRICAO_CARGO) values ('Tesoureiro');
-insert into CARGO(DESCRICAO_CARGO) values ('Protocolo');
-insert into CARGO(DESCRICAO_CARGO) values ('Comunidades');
-insert into CARGO(DESCRICAO_CARGO) values ('Internos');
-insert into CARGO(DESCRICAO_CARGO) values ('Imagem Pública');
-insert into CARGO(DESCRICAO_CARGO) values ('Finanças');
-insert into CARGO(DESCRICAO_CARGO) values ('Internacionais');
+			ID_CARGO BIGINT NOT NULL AUTO_INCREMENT,
+			ID_ASSOCIADO BIGINT,
+			DESCRICAO_CARGO VARCHAR(2000),
+			PRIMARY KEY (ID_CARGO)
+		); 
+		insert into CARGO(DESCRICAO_CARGO) values ('Presidente');
+		insert into CARGO(DESCRICAO_CARGO) values ('Vice-Presidente');
+		insert into CARGO(DESCRICAO_CARGO) values ('Secretário');
+		insert into CARGO(DESCRICAO_CARGO) values ('Tesoureiro');
+		insert into CARGO(DESCRICAO_CARGO) values ('Protocolo');
+		insert into CARGO(DESCRICAO_CARGO) values ('Comunidade');
+		insert into CARGO(DESCRICAO_CARGO) values ('Internos');
+		insert into CARGO(DESCRICAO_CARGO) values ('Imagem Pública');
+		insert into CARGO(DESCRICAO_CARGO) values ('Finanças');
+		insert into CARGO(DESCRICAO_CARGO) values ('Internacionais');
+		insert into CARGO(DESCRICAO_CARGO) values ('DQA');
+		insert into CARGO(DESCRICAO_CARGO) values ('Jurídico');
+		insert into CARGO(DESCRICAO_CARGO) values ('Diversidade, Equidade e Inclusão');
+		insert into CARGO(DESCRICAO_CARGO) values ('Profissionais');
 		</sql>
 		<rollback>
 			<sql>
