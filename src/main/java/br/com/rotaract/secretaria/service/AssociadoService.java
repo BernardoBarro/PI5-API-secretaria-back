@@ -1,5 +1,8 @@
 package br.com.rotaract.secretaria.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +60,20 @@ public class AssociadoService {
 		associadoRepository.save(associado);
 		
 		return associado;
+	}
+
+	public List<Associado> findAssociado() {
+		
+		List<Associado> associados = associadoRepository.findAll();		
+		
+		return associados;
+	}
+
+	public Associado findAssociado(Long ri) {
+		
+		Optional<Associado> associado = associadoRepository.findById(ri);
+
+		return associado.get();
 	}
 
 	
