@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
+import br.com.rotaract.secretaria.dto.AssociadoEditDto;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.model.Cargo;
 import br.com.rotaract.secretaria.model.Endereco;
@@ -20,6 +21,8 @@ import br.com.rotaract.secretaria.repository.PessoaRepository;
 @Service
 public class AssociadoService {
 	
+	private final String ASSOCIADO = "Associado";
+	
 	@Autowired
 	private AssociadoRepository associadoRepository;
 	@Autowired
@@ -31,6 +34,7 @@ public class AssociadoService {
 
 	public Associado createAssociado(AssociadoDto associadoDto) {
 		Endereco endereco = new Endereco();
+		//pesquisa endereço no viacep
 		endereco.setCep(associadoDto.getCep());
 		
 		enderecoRepository.save(endereco);
@@ -47,7 +51,7 @@ public class AssociadoService {
 		
 		pessoaRepository.save(pessoa);
 		
-		Cargo cargo = cargoRepository.findByNome(associadoDto.getCargo().getDescricao());
+		Cargo cargo = cargoRepository.findByNome(ASSOCIADO);
 		
 		Associado associado = new Associado();
 		associado.setRI(associadoDto.getRI());
@@ -74,6 +78,37 @@ public class AssociadoService {
 		Optional<Associado> associado = associadoRepository.findById(ri);
 
 		return associado.get();
+	}
+
+	public Associado updateAssociado(Long ri, AssociadoEditDto associadoEditDto) {
+
+		Optional<Associado> optAssociado = associadoRepository.findById(ri);
+		Associado associado = optAssociado.get();
+		
+		if(!associado.getPessoa().getEndereco().getCep().equals(associadoEditDto.getCep())) {
+			associado.getPessoa().getEndereco().setCep(associadoEditDto.getCep());
+			//pesquisa endereço no viacep
+		}
+		
+		associado.getPessoa().setNome(associadoEditDto.getNome());
+		associado.getPessoa().setGenero(associadoEditDto.getGenero());
+		associado.getPessoa().setOcupacao(associadoEditDto.getOcupacao());
+		associado.getPessoa().setNascimento(associadoEditDto.getNascimento());
+		associado.getPessoa().setEmail(associadoEditDto.getEmail());
+		associado.getPessoa().setTelefone(associadoEditDto.getTelefone());
+		
+		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo().getDescricao())) {
+			Cargo cargo = cargoRepository.findByNome(associadoEditDto.getCargo().getDescricao());
+			associado.setCargo(cargo);
+		}
+		
+		associado.setStatus(associadoEditDto.getStatus());
+		associado.setDataAdmissao(associadoEditDto.getAdmissao());
+		associado.setPadrinho(associadoEditDto.getPadrinho());
+		
+		associadoRepository.save(associado);
+		
+		return associado;
 	}
 
 	
