@@ -21,11 +21,14 @@ public class Patrocinador {
 	@Column(name = "id_patrocinador")
 	private Long id;
 
+	@Column(name = "valor_decimal")
+	private Double valor_decimal;
+
+	@Column(name = "Descricao")
+	private String descricao;
+	
 	@Column(name = "nome_patrocinador")
 	private String nome;
-
-	@Column(name = "Contato")
-	private String contato;
 
 	public Long getId() {
 		return id;
@@ -34,20 +37,28 @@ public class Patrocinador {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Double getvalor_decimal() {
+		return valor_decimal;
+	}
 
+	public void setvalor_decimal(Double valor_decimal) {
+		this.valor_decimal = valor_decimal;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getContato() {
-		return contato;
-	}
-
-	public void setContato(String contato) {
-		this.contato = contato;
 	}
 }

@@ -15,8 +15,9 @@ public class PatrocinadorService {
 
 	public Patrocinador createPatrocinador(PatrocinadorDto patrocinadorDto) {
 		Patrocinador patrocinador = new Patrocinador();
+		patrocinador.setvalor_decimal(patrocinadorDto.getValorDecimal());
+		patrocinador.setDescricao(patrocinadorDto.getDescricao());
 		patrocinador.setNome(patrocinadorDto.getNome());
-		patrocinador.setContato(patrocinadorDto.getContato());
 
 		patrocinadorRepository.save(patrocinador);
 
