@@ -21,7 +21,7 @@ public class Patrocinador {
 	@Column(name = "id_patrocinador")
 	private Long id;
 
-	@Column(name = "valor_decimal")
+	@Column(name = "valor")
 	private Double valor_decimal;
 
 	@Column(name = "Descricao")
