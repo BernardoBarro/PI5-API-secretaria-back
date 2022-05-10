@@ -2,27 +2,21 @@ package br.com.rotaract.secretaria.dto;
 
 import java.time.LocalDateTime;
 
-public class AssociadoDto {
+import br.com.rotaract.secretaria.constant.StatusAssociado;
 
-	private Long RI;
+public class AssociadoEditDto {
+
 	private String nome;
+	private StatusAssociado status;
 	private String genero;
 	private String ocupacao;
 	private LocalDateTime nascimento;
 	private String cep;
 	private String email;
-	private String senha;
 	private LocalDateTime admissao;
 	private String telefone;
 	private String padrinho;
-
-	public Long getRI() {
-		return RI;
-	}
-
-	public void setRI(Long rI) {
-		RI = rI;
-	}
+	private CargoDto cargo;
 
 	public String getNome() {
 		return nome;
@@ -30,6 +24,14 @@ public class AssociadoDto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public StatusAssociado getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusAssociado status) {
+		this.status = status;
 	}
 
 	public String getGenero() {
@@ -72,14 +74,6 @@ public class AssociadoDto {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	public LocalDateTime getAdmissao() {
 		return admissao;
 	}
@@ -102,6 +96,14 @@ public class AssociadoDto {
 
 	public void setPadrinho(String padrinho) {
 		this.padrinho = padrinho;
+	}
+
+	public CargoDto getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(CargoDto cargo) {
+		this.cargo = cargo;
 	}
 
 }

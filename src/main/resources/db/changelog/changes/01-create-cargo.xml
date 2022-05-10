@@ -28,6 +28,7 @@
 		insert into CARGO(DESCRICAO_CARGO) values ('Jurídico');
 		insert into CARGO(DESCRICAO_CARGO) values ('Diversidade, Equidade e Inclusão');
 		insert into CARGO(DESCRICAO_CARGO) values ('Profissionais');
+		insert into CARGO(DESCRICAO_CARGO) values ('Associado');
 		</sql>
 		<rollback>
 			<sql>
