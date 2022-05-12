@@ -1,15 +1,20 @@
 package br.com.rotaract.secretaria.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.dto.InstituicaoDto;
+import br.com.rotaract.secretaria.dto.InstituicaoEditDto;
 import br.com.rotaract.secretaria.model.Instituicao;
 import br.com.rotaract.secretaria.repository.InstituicaoRepository;
 
 @Service
 public class InstituicaoService {
 
+	
 	@Autowired
 	private InstituicaoRepository instituicaoRepository;
 	
@@ -22,6 +27,34 @@ public class InstituicaoService {
 
 		return instituicao;
 	}
+	
+	
+	public List<Instituicao> findInstituicao() {
+		
+		List<Instituicao> instituicoes = instituicaoRepository.findAll();		
+		
+		return instituicoes;
+	}
 
+	public Instituicao findInstituicao(Long ri) {
+		
+		Optional<Instituicao> instituicao = instituicaoRepository.findById(ri);
+
+		return instituicao.get();
+	}
+	
+	
+	public Instituicao updateInstituicao(Long ri, InstituicaoEditDto instituicaoEditDto) {
+
+		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
+		Instituicao instituicao = optInstituicao.get();
+
+		instituicao.setNome(instituicaoEditDto.getNome());
+		instituicao.setContato(instituicaoEditDto.getContato());
+
+		instituicaoRepository.save(instituicao);
+
+		return instituicao;
+	}
 
 }
