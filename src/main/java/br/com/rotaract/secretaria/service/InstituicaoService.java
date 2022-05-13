@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.dto.InstituicaoDto;
-import br.com.rotaract.secretaria.dto.InstituicaoEditDto;
 import br.com.rotaract.secretaria.model.Instituicao;
 import br.com.rotaract.secretaria.repository.InstituicaoRepository;
 
@@ -44,13 +43,13 @@ public class InstituicaoService {
 	}
 	
 	
-	public Instituicao updateInstituicao(Long ri, InstituicaoEditDto instituicaoEditDto) {
+	public Instituicao updateInstituicao(Long ri, InstituicaoDto instituicaoDto) {
 
 		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
 		Instituicao instituicao = optInstituicao.get();
 
-		instituicao.setNome(instituicaoEditDto.getNome());
-		instituicao.setContato(instituicaoEditDto.getContato());
+		instituicao.setNome(instituicaoDto.getNome());
+		instituicao.setContato(instituicaoDto.getContato());
 
 		instituicaoRepository.save(instituicao);
 

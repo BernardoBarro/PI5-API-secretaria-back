@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rotaract.secretaria.dto.InstituicaoDto;
-import br.com.rotaract.secretaria.dto.InstituicaoEditDto;
 import br.com.rotaract.secretaria.model.Instituicao;
 import br.com.rotaract.secretaria.service.InstituicaoService;
 
@@ -47,7 +46,7 @@ public class InstituicaoController {
 	 
 	@PutMapping("/{ri}")
 	public Instituicao editInstituicao(@PathVariable Long ri, 
-			@RequestBody InstituicaoEditDto instituicaoEditDto) {
+			@RequestBody InstituicaoDto instituicaoEditDto) {
 
 		return service.updateInstituicao(ri, instituicaoEditDto);
 
