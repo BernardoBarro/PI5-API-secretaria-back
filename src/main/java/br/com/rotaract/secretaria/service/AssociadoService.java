@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.rotaract.secretaria.client.ViaCepClient;
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.dto.AssociadoEditDto;
+import br.com.rotaract.secretaria.dto.ViaCepObject;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.model.Cargo;
 import br.com.rotaract.secretaria.model.Endereco;
@@ -31,11 +33,16 @@ public class AssociadoService {
 	private CargoRepository cargoRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private ViaCepClient client;
 
 	public Associado createAssociado(AssociadoDto associadoDto) {
 		Endereco endereco = new Endereco();
-		//pesquisa endereço no viacep
+		ViaCepObject viaCep = client.getEndereco(associadoDto.getCep());
 		endereco.setCep(associadoDto.getCep());
+		endereco.setRua(viaCep.getLogradouro());
+		endereco.setBairro(viaCep.getBairro());
+		endereco.setCidade(viaCep.getLocalidade());
 		
 		enderecoRepository.save(endereco);
 		
@@ -87,7 +94,10 @@ public class AssociadoService {
 		
 		if(!associado.getPessoa().getEndereco().getCep().equals(associadoEditDto.getCep())) {
 			associado.getPessoa().getEndereco().setCep(associadoEditDto.getCep());
-			//pesquisa endereço no viacep
+			ViaCepObject viaCep = client.getEndereco(associadoEditDto.getCep());
+			associado.getPessoa().getEndereco().setRua(viaCep.getLogradouro());
+			associado.getPessoa().getEndereco().setBairro(viaCep.getBairro());
+			associado.getPessoa().getEndereco().setCidade(viaCep.getLocalidade());
 		}
 		
 		associado.getPessoa().setNome(associadoEditDto.getNome());
