@@ -34,17 +34,17 @@ public class ConvidadoService {
 		return convidado;
 	}
 
-	public Convidado findConvidado(Long ri) {
+	public Convidado findConvidado(Long id) {
 		
-		Optional<Convidado> convidado = convidadoRepository.findById(ri);
+		Optional<Convidado> convidado = convidadoRepository.findById(id);
 
 		return convidado.get();
 	}
 	
 	
-	public Convidado updateConvidado(Long ri, ConvidadoDto convidadoDto) {
+	public Convidado updateConvidado(Long id, ConvidadoDto convidadoDto) {
 
-		Optional<Convidado> optConvidado = convidadoRepository.findById(ri);
+		Optional<Convidado> optConvidado = convidadoRepository.findById(id);
 		Convidado convidado = optConvidado.get();
 		convidado.setNome(convidadoDto.getNome());
 		convidado.setContato(convidadoDto.getContato());

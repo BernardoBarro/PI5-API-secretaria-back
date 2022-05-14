@@ -37,7 +37,7 @@ public class ConvidadoController {
 		
 	}
 	
-	@GetMapping("/{ri}")
+	@GetMapping("/{id}")
 	public Convidado getConvidado(@PathVariable Long ri) {
 		
 		return service.findConvidado(ri);
@@ -45,11 +45,11 @@ public class ConvidadoController {
 	}
 	
 	 
-	@PutMapping("/{ri}")
-	public Convidado editConvidado(@PathVariable Long ri, 
+	@PutMapping("/{id}")
+	public Convidado editConvidado(@PathVariable Long id, 
 			@RequestBody ConvidadoDto convidadoEditDto) {
 
-		return service.updateConvidado(ri, convidadoEditDto);
+		return service.updateConvidado(id, convidadoEditDto);
 
 	}
 
