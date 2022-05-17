@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "patrocinadores")
+@Table(name = "patrocinador")
 @Entity
 public class Patrocinador {
 
