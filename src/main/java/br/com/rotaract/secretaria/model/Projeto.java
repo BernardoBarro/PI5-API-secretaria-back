@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,47 +22,49 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PROJETO")
+@Table(name = "projeto")
 @Entity
 public class Projeto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_PROJETO")
+	@Column(name = "id_projeto")
 	private Long id;
 
-	@Column(name = "NOME_PROJETO")
+	@Column(name = "nome_projeto")
 	private String nome;
 
-	@Column(name = "DESCRICAO_PROJETO")
+	@Column(name = "descricao_projeto")
 	private String descricao;
 
-	@Column(name = "DATA_INICIO")
+	@Column(name = "data_inicio")
 	private LocalDateTime dataInicio;
 
-	@Column(name = "DATA_FIM")
+	@Column(name = "data_fim")
 	private LocalDateTime dataFim;
 
-	@Column(name = "CATEGORIA")
+	@Column(name = "categoria")
 	private Categoria categoria;
 
-	@Column(name = "AREA_ENFOQUE")
+	@Column(name = "area_enfoque")
 	private AreaEnfoque areaEnfoque;
 
-	@Column(name = "STATUS_PROJETO")
+	@Column(name = "status_projeto")
 	private StatusProjeto status;
 
 	@OneToMany
-	@JoinColumn(name = "ID_PATROCINADOR")
+	@JoinColumn(name = "id_patrocinador")
 	private List<Patrocinador> patrocinadores;
 
 	@ManyToMany
-	@JoinColumn(name = "ID_INSTITUICAO")
+	@JoinTable(name = "projeto_instituicoes_beneficiadas", joinColumns = @JoinColumn(name = "id_projeto", referencedColumnName = "id_projeto"),
+			inverseJoinColumns=@JoinColumn(name="id_instituicao", referencedColumnName="id_instituicao"))
 	private List<Instituicao> instituicoes;
 
 	@ManyToMany
-	@Column(name = "ID_ASSOCIADO")
-	private List<Associado> associados;
+	@JoinTable(name = "projeto_associado", joinColumns = @JoinColumn(name = "id_projeto", referencedColumnName = "id_projeto"),
+			inverseJoinColumns=@JoinColumn(name="id_associado", referencedColumnName="id_associado"))
+	private List<Associado> associado;
 
 	public Long getId() {
 		return id;
@@ -144,11 +147,11 @@ public class Projeto {
 	}
 
 	public List<Associado> getAssociados() {
-		return associados;
+		return associado;
 	}
 
 	public void setAssociados(List<Associado> associados) {
-		this.associados = associados;
+		this.associado = associados;
 	}
 
 //	@OneToOne
