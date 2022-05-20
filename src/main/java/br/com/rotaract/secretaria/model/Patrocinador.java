@@ -22,11 +22,11 @@ public class Patrocinador {
 	private Long id;
 
 	@Column(name = "valor")
-	private Double valor_decimal;
+	private Double valorDecimal;
 
 	@Column(name = "Descricao")
 	private String descricao;
-	
+
 	@Column(name = "nome_patrocinador")
 	private String nome;
 
@@ -37,15 +37,15 @@ public class Patrocinador {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public Double getvalor_decimal() {
-		return valor_decimal;
+
+	public Double getValorDecimal() {
+		return valorDecimal;
 	}
 
-	public void setvalor_decimal(Double valor_decimal) {
-		this.valor_decimal = valor_decimal;
+	public void setValorDecimal(Double valorDecimal) {
+		this.valorDecimal = valorDecimal;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -53,7 +53,7 @@ public class Patrocinador {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -61,4 +61,5 @@ public class Patrocinador {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }

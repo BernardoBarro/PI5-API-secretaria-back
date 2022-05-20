@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="14_create_projeto_associado" author="Bernardo">
+		<sql>
+			CREATE TABLE projeto_associado (
+			    id_projeto bigint NOT NULL,
+			    id_associado bigint NOT NULL,
+			    CONSTRAINT projeto_associado_un UNIQUE (id_projeto, id_associado)
+			);
+
+		</sql>
+		<rollback>
+			<sql>
+				DROP TABLE projeto_associado;
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>
