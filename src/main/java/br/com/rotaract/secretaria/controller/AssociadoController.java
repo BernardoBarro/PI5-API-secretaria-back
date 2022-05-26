@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.dto.AssociadoEditDto;
+import br.com.rotaract.secretaria.dto.PessoaCargo;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.service.AssociadoService;
 
@@ -31,7 +32,7 @@ public class AssociadoController {
 	}
 	
 	@GetMapping
-	public List<Associado> listAssociado() {
+	public List<Associado> pegaAssociado() {
 		
 		return service.findAssociado();
 		
@@ -43,6 +44,16 @@ public class AssociadoController {
 		return service.findAssociado(ri);
 		
 	}
+	
+	
+	@GetMapping
+	public List<PessoaCargo> pegaAssociadoPorCargo() {
+		
+		return service.pegaPessoaPorCargo();
+
+	}
+	
+	
 	
 	@PutMapping("/{ri}")
 	public Associado editAssociado(@PathVariable Long ri, 

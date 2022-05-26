@@ -10,6 +10,7 @@ import br.com.rotaract.secretaria.client.ViaCepClient;
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.dto.AssociadoEditDto;
+import br.com.rotaract.secretaria.dto.PessoaCargo;
 import br.com.rotaract.secretaria.dto.ViaCepObject;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.model.Cargo;
@@ -119,6 +120,11 @@ public class AssociadoService {
 		associadoRepository.save(associado);
 		
 		return associado;
+	}
+	
+	public List<PessoaCargo> pegaPessoaPorCargo() {
+		List<PessoaCargo> pessoa = associadoRepository.findByCargo();
+		return pessoa;
 	}
 
 	

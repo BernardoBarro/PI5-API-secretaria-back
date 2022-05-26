@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="13_create_associado" author="joao">
+		<sql>
+			CREATE TABLE ASSOCIADO (
+			ID_ASSOCIADO BIGINT NOT NULL AUTO_INCREMENT,
+			ID_REUNIAO BIGINT,
+			ID_VOTACAO BIGINT,
+			ID_CARGO BIGINT,
+			ID_PESSOA BIGINT,
+			STATUS_ASSOCIADO VARCHAR(25),
+			DATA_ADMISSAO DATE,
+			PADRINHO VARCHAR(50),	
+			PRIMARY KEY (ID_ASSOCIADO),
+			FOREIGN KEY (ID_CARGO) REFERENCES CARGO(ID_CARGO) ON UPDATE CASCADE ON DELETE CASCADE,
+			FOREIGN KEY (ID_PESSOA) REFERENCES PESSOA(ID_PESSOA) ON UPDATE CASCADE ON DELETE CASCADE,
+			FOREIGN KEY (ID_REUNIAO) REFERENCES REUNIAO(ID_REUNIAO) ON UPDATE CASCADE ON DELETE CASCADE,
+			FOREIGN KEY (ID_VOTACAO) REFERENCES VOTACAO(ID_VOTACAO) ON UPDATE CASCADE ON DELETE CASCADE
+		);
+
+
+		</sql>
+		<rollback>
+			<sql>
+				DROP TABLE ASSOCIADO;
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

@@ -7,5 +7,5 @@ import br.com.rotaract.secretaria.model.Pessoa;
 
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
-
+		
 }

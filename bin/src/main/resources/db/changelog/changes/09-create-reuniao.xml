@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="12_create_reuniao" author="joao">
+		<sql>
+			CREATE TABLE REUNIAO (
+    ID_REUNIAO BIGINT NOT NULL AUTO_INCREMENT,
+    ID_PROJETO BIGINT,
+    ID_CONVIDADO BIGINT,
+    DATA_REUNIAO TIMESTAMP,
+    ASSUNTO VARCHAR(1000),
+    NOME VARCHAR(50),
+    LOCAL VARCHAR(200),
+    PRIMARY KEY (ID_REUNIAO),
+    FOREIGN KEY (ID_CONVIDADO) REFERENCES CONVIDADO(ID_CONVIDADO) ON UPDATE CASCADE ON DELETE CASCADE
+); 
+
+		</sql>
+		<rollback>
+			<sql>
+				DROP TABLE REUNIAO;
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

@@ -10,6 +10,7 @@ import br.com.rotaract.secretaria.dto.InstituicaoDto;
 import br.com.rotaract.secretaria.model.Instituicao;
 import br.com.rotaract.secretaria.repository.InstituicaoRepository;
 
+
 @Service
 public class InstituicaoService {
 
@@ -41,6 +42,10 @@ public class InstituicaoService {
 
 		return instituicao.get();
 	}
+	
+	
+	
+	
 	
 	
 	public Instituicao updateInstituicao(Long ri, InstituicaoDto instituicaoDto) {

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="13_create_projeto_instituicoes_beneficiadas" author="Bernardo">
+		<sql>
+			CREATE TABLE projeto_instituicoes_beneficiadas (
+			    id_projeto bigint NOT NULL,
+			    id_instituicao bigint NOT NULL,
+			    CONSTRAINT projeto_instituicoes_beneficiadas_un UNIQUE (id_projeto, id_instituicao)
+			);
+
+		</sql>
+		<rollback>
+			<sql>
+				DROP TABLE projeto_instituicoes_beneficiadas;
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>
