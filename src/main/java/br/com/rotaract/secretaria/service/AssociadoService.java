@@ -1,5 +1,6 @@
 package br.com.rotaract.secretaria.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -122,9 +123,16 @@ public class AssociadoService {
 		return associado;
 	}
 	
-	public List<PessoaCargo> pegaPessoaPorCargo() {
-		List<PessoaCargo> pessoa = associadoRepository.findByCargo();
-		return pessoa;
+	public List<PessoaCargo> getByCargo() {
+		List<Pessoa> pessoa = pessoaRepository.findByCargo();
+		List<PessoaCargo> listPessoasCargo = new ArrayList<>();
+		pessoa.forEach(n -> {
+			PessoaCargo pessoaCargo = new PessoaCargo();
+			pessoaCargo.setNome(n.getNome());
+			pessoaCargo.setCargo(n.getAssociado().getCargo().getNome());
+			listPessoasCargo.add(pessoaCargo);
+		});
+		return listPessoasCargo;
 	}
 
 	

@@ -32,31 +32,31 @@ public class AssociadoController {
 	}
 	
 	@GetMapping
-	public List<Associado> pegaAssociado() {
+	public List<Associado> getAllAssociados() {
 		
 		return service.findAssociado();
 		
 	}
 	
 	@GetMapping("/{ri}")
-	public Associado getAssociado(@PathVariable Long ri) {
+	public Associado getById(@PathVariable Long ri) {
 		
 		return service.findAssociado(ri);
 		
 	}
 	
 	
-	@GetMapping
-	public List<PessoaCargo> pegaAssociadoPorCargo() {
+	@GetMapping("/cargo")
+	public List<PessoaCargo> getByCargo() {
 		
-		return service.pegaPessoaPorCargo();
+		return service.getByCargo();
 
 	}
 	
 	
 	
 	@PutMapping("/{ri}")
-	public Associado editAssociado(@PathVariable Long ri, 
+	public Associado updateAssociado(@PathVariable Long ri, 
 			@RequestBody AssociadoEditDto associadoEditDto) {
 		
 		return service.updateAssociado(ri, associadoEditDto);
