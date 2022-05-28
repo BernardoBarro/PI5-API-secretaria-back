@@ -47,7 +47,7 @@ public class PatrocinadorService {
 		Optional<Patrocinador> optPatrocinador = patrocinadorRepository.findById(id);
 		Patrocinador patrocinador = optPatrocinador.get();
 
-		patrocinador.setvalor_decimal(patrocinadorDto.getValorDecimal());
+		patrocinador.setValorDecimal(patrocinadorDto.getValorDecimal());
 		patrocinador.setDescricao(patrocinadorDto.getDescricao());
 		patrocinador.setNome(patrocinadorDto.getNome());
 		
