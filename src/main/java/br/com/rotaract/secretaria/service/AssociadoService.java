@@ -1,5 +1,6 @@
 package br.com.rotaract.secretaria.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import br.com.rotaract.secretaria.client.ViaCepClient;
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.dto.AssociadoEditDto;
+import br.com.rotaract.secretaria.dto.PessoaCargo;
 import br.com.rotaract.secretaria.dto.ViaCepObject;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.model.Cargo;
@@ -119,6 +121,18 @@ public class AssociadoService {
 		associadoRepository.save(associado);
 		
 		return associado;
+	}
+
+	public List<PessoaCargo> getByCargo() {
+		List<Pessoa> pessoa = pessoaRepository.findByCargo();
+		List<PessoaCargo> listPessoasCargo = new ArrayList<>();
+		pessoa.forEach(n -> {
+			PessoaCargo pessoaCargo = new PessoaCargo();
+			pessoaCargo.setNome(n.getNome());
+			pessoaCargo.setCargo(n.getAssociado().getCargo().getNome());
+			listPessoasCargo.add(pessoaCargo);
+		});
+		return listPessoasCargo;
 	}
 
 	

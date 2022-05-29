@@ -6,7 +6,7 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="10_create_instituicoes_beneficiadas" author="joao">
+	<changeSet id="08_create_instituicoes_beneficiadas" author="joao">
 		<sql>
 	CREATE TABLE INSTITUICOES_BENEFICIADAS (
     ID_INSTITUICAO BIGINT NOT NULL AUTO_INCREMENT,
