@@ -42,9 +42,6 @@ public class Pessoa {
 	@Column(name = "restricoes_medicas")
 	private String restricoesMedicas;
 
-	@Column(name = "email")
-	private String email;
-
 	@Column(name = "telefone")
 	private String telefone;
 
@@ -53,9 +50,6 @@ public class Pessoa {
 
 	@Column(name = "nome_cracha")
 	private String cracha;
-
-	@Column(name = "senha")
-	private String senha;
 
 	@OneToOne
 	@JoinColumn(name = "id_endereco", nullable = false)
@@ -113,14 +107,6 @@ public class Pessoa {
 		this.restricoesMedicas = restricoesMedicas;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
@@ -143,14 +129,6 @@ public class Pessoa {
 
 	public void setCracha(String cracha) {
 		this.cracha = cracha;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public Endereco getEndereco() {
