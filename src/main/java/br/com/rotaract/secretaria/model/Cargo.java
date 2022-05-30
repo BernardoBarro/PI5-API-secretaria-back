@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -19,9 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "cargo")
 @Entity
-public class Cargo implements GrantedAuthority{
-
-	private static final long serialVersionUID = 1L;
+public class Cargo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,11 +53,6 @@ public class Cargo implements GrantedAuthority{
 
 	public void setAssociado(Associado associado) {
 		this.associado = associado;
-	}
-
-	@Override
-	public String getAuthority() {
-		return this.nome;
 	}
 
 }

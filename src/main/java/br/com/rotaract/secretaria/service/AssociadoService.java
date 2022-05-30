@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.client.ViaCepClient;
@@ -54,7 +53,9 @@ public class AssociadoService {
 		pessoa.setGenero(associadoDto.getGenero());
 		pessoa.setOcupacao(associadoDto.getOcupacao());
 		pessoa.setNascimento(associadoDto.getNascimento());
+		pessoa.setEmail(associadoDto.getEmail());
 		pessoa.setTelefone(associadoDto.getTelefone());
+		pessoa.setSenha(associadoDto.getSenha());
 		pessoa.setEndereco(endereco);
 		
 		pessoaRepository.save(pessoa);
@@ -66,8 +67,6 @@ public class AssociadoService {
 		associado.setStatus(StatusAssociado.ATIVO);
 		associado.setDataAdmissao(associadoDto.getAdmissao());
 		associado.setPadrinho(associadoDto.getPadrinho());
-		associado.setEmail(associadoDto.getEmail());
-		associado.setSenha(new BCryptPasswordEncoder().encode(associadoDto.getSenha()));
 		associado.setPessoa(pessoa);
 		associado.setCargo(cargo);
 		
@@ -107,6 +106,7 @@ public class AssociadoService {
 		associado.getPessoa().setGenero(associadoEditDto.getGenero());
 		associado.getPessoa().setOcupacao(associadoEditDto.getOcupacao());
 		associado.getPessoa().setNascimento(associadoEditDto.getNascimento());
+		associado.getPessoa().setEmail(associadoEditDto.getEmail());
 		associado.getPessoa().setTelefone(associadoEditDto.getTelefone());
 		
 		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo().getDescricao())) {
@@ -117,7 +117,6 @@ public class AssociadoService {
 		associado.setStatus(associadoEditDto.getStatus());
 		associado.setDataAdmissao(associadoEditDto.getAdmissao());
 		associado.setPadrinho(associadoEditDto.getPadrinho());
-		associado.setEmail(associadoEditDto.getEmail());
 		
 		associadoRepository.save(associado);
 		
