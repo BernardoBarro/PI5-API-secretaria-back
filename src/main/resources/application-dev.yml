@@ -6,8 +6,3 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
-    
-autenticacao:
-  jwt:
-    secret: A7%D@XGK=E#fP362c*KD
-    expiration: 86400000

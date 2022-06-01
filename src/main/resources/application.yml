@@ -1,13 +1,8 @@
 spring:
   datasource:
-    url: jdbc:${DATABASE_URL}
-    username: ${USER}
-    password: ${PASSWORD}
+    url: jdbc:mysql://localhost/secretariartc?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
-    
-autenticacao:
-  jwt:
-    secret: ${JWT_SECRET}
-    expiration: ${JWT_EXPIRATION}
