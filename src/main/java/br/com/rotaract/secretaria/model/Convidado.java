@@ -12,23 +12,20 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "patrocinador")
+@Table(name = "convidado")
 @Entity
-public class Patrocinador {
+public class Convidado {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_patrocinador")
+	@Column(name = "id_convidado")
 	private Long id;
 
-	@Column(name = "valor")
-	private Double valorDecimal;
-
-	@Column(name = "Descricao")
-	private String descricao;
-
-	@Column(name = "nome_patrocinador")
+	@Column(name = "nome")
 	private String nome;
+
+	@Column(name = "Contato")
+	private String contato;
 
 	public Long getId() {
 		return id;
@@ -37,29 +34,21 @@ public class Patrocinador {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Double getValorDecimal() {
-		return valorDecimal;
-	}
-
-	public void setValorDecimal(Double valorDecimal) {
-		this.valorDecimal = valorDecimal;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getContato() {
+		return contato;
+	}
+
+	public void setContato(String contato) {
+		this.contato = contato;
 	}
 
 }
