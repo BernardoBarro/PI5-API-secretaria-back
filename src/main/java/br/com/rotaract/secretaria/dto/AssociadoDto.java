@@ -1,14 +1,14 @@
 package br.com.rotaract.secretaria.dto;
 import java.time.LocalDateTime;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class AssociadoDto {
 
 	private Long RI;
 	
-	@NotBlank
+	@NotNull
 	private String nome;
 	
 	@Size(min = 1, max = 1)
@@ -17,20 +17,20 @@ public class AssociadoDto {
 	@Size(max = 25, message = "O campo ocupação deve ter no máximo 25 caracteres")
 	private String ocupacao;
 	
-	@NotBlank
+	@NotNull
 	private LocalDateTime nascimento;
 	
-	@NotBlank
+	@NotNull
 	private String cep;
 	
 	@Email(message = "O e-mail deve ser válido")
 	private String email;
 	
-	@NotBlank
+	@NotNull
 	@Size(max = 25, message = "O campo senha deve ter no máximo 25 caracteres")
 	private String senha;
 	
-	@NotBlank
+	@NotNull
 	private LocalDateTime admissao;
 	
 	@Size(min = 11, max = 11)

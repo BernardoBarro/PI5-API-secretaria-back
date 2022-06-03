@@ -2,6 +2,8 @@ package br.com.rotaract.secretaria.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,7 @@ public class InstituicaoController {
 	private InstituicaoService service;
 
 	@PostMapping
-	public Instituicao createInstituicao(@RequestBody InstituicaoDto instituicaoDto) {
+	public Instituicao createInstituicao(@RequestBody @Valid InstituicaoDto instituicaoDto) {
 
 		return service.createInstituicao(instituicaoDto);
 

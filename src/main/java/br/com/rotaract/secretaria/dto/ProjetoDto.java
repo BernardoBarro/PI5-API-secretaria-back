@@ -3,16 +3,29 @@ package br.com.rotaract.secretaria.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import br.com.rotaract.secretaria.constant.AreaEnfoque;
 import br.com.rotaract.secretaria.constant.Categoria;
 import br.com.rotaract.secretaria.model.Instituicao;
 
 public class ProjetoDto {
 
+	@NotNull
+	@Size(max = 50, message = "O campo nome deve ter no máximo 50 caracteres")
 	private String nome;
+	
+	@NotNull
+	@Size(max = 5000, message = "O campo descrição deve ter no máximo 5000 caracteres")
 	private String descricao;
+	
+	@Size(max = 50, message = "O campo categoria deve ter no máximo 50 caracteres")
 	private Categoria categoria;
+	
+	@Size(max = 50, message = "O campo área de enfoque deve ter no máximo 50 caracteres")
 	private AreaEnfoque areaEnfoque;
+	
 	private LocalDateTime dataInicio;
 	private LocalDateTime dataFinal;
 	private List<PatrocinadorDto> patrocinadores;

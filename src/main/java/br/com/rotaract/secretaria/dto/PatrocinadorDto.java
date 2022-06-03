@@ -1,11 +1,11 @@
 package br.com.rotaract.secretaria.dto;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 public class PatrocinadorDto {
 
-	@NotBlank
+	@NotNull
 	private Double valorDecimal;
 	
 	@Size(max = 2000, message = "A Descrição deve ter no máximo 2000 caracteres")
