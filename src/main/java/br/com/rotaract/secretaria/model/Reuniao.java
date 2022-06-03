@@ -35,14 +35,15 @@ public class Reuniao{
 	@Column(name = "local")
 	private String local;
 	
-	//ainda não possui projeto e convidado
+	
+	/*//ainda não possui projeto e convidado
 	@OneToOne
 	@JoinColumn(name = "id_projeto", nullable = false)
 	private Projeto projeto;
  
 	@OneToOne
 	@JoinColumn(name = "id_convidado", nullable = false)
-	private Convidado convidado;
+	private Convidado convidado;*/
 	
 	public Long getId() {
 		return id;
@@ -84,7 +85,7 @@ public class Reuniao{
 		this.local = local;
 	}
     
-	public Projeto getProjeto() {
+	/*public Projeto getProjeto() {
 		return projeto;
 	}
 
@@ -98,7 +99,7 @@ public class Reuniao{
 
 	public void setConvidado(Convidado convidado) {
 		this.convidado = convidado;
-	}
+	}*/
 
 	
 }
