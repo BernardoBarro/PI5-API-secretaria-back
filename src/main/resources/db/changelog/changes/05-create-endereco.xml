@@ -6,7 +6,7 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="06_create_endereco" author="joao">
+	<changeSet id="05_create_endereco" author="joao">
 		<sql>
 			CREATE TABLE ENDERECO (
 			ID_ENDERECO BIGINT NOT NULL AUTO_INCREMENT,

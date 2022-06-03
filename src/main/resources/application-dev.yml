@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/secretariartc?useTimezone=true&serverTimezone=UTC
     username: root
-    password: masterkey
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
