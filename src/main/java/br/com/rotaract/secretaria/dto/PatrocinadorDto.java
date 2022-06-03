@@ -1,17 +1,18 @@
 package br.com.rotaract.secretaria.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Length;
 
 public class PatrocinadorDto {
 
 	@NotNull
 	private Double valorDecimal;
 	
+	@NotNull
 	@Size(max = 2000, message = "A Descrição deve ter no máximo 2000 caracteres")
 	private String descricao;
 	
-	@Length(min = 1, max = 50, message = "O nome deve ter no máximo 50 caracteres")
+	@NotNull
+	@Size(min = 1, max = 50, message = "O nome deve ter no máximo 50 caracteres")
 	private String nome;
 	
 	public Double getValorDecimal() {

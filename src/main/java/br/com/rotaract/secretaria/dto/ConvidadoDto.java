@@ -9,6 +9,7 @@ public class ConvidadoDto {
 	@Size(max = 25, message = "O campo nome deve ter no máximo 50 caracteres")
 	private String nome;
 	
+	@NotNull
 	@Size(max = 25, message = "O campo contato deve ter no máximo 25 caracteres")
 	private String contato;
 	

@@ -11,9 +11,11 @@ public class AssociadoDto {
 	@NotNull
 	private String nome;
 	
+	@NotNull
 	@Size(min = 1, max = 1)
 	private String genero;
 	
+	@NotNull
 	@Size(max = 25, message = "O campo ocupação deve ter no máximo 25 caracteres")
 	private String ocupacao;
 	
@@ -23,6 +25,7 @@ public class AssociadoDto {
 	@NotNull
 	private String cep;
 	
+	@NotNull
 	@Email(message = "O e-mail deve ser válido")
 	private String email;
 	
@@ -33,9 +36,11 @@ public class AssociadoDto {
 	@NotNull
 	private LocalDateTime admissao;
 	
+	@NotNull
 	@Size(min = 11, max = 11)
 	private String telefone;
 	
+	@NotNull
 	@Size(max = 50, message = "O campo padrinho deve ter no máximo 50 caracteres")
 	private String padrinho;
 

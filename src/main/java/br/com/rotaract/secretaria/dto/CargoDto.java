@@ -1,8 +1,10 @@
 package br.com.rotaract.secretaria.dto;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class CargoDto {
 
+	@NotNull
 	@Size(max = 2000, message = "A Descrição deve ter no máximo 2000 caracteres")
 	private String descricao;
 
