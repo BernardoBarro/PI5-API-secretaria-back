@@ -2,6 +2,8 @@ package br.com.rotaract.secretaria.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,7 @@ public class ProjetoController {
 	private ProjetoService service;
 
 	@PostMapping
-	public Projeto criacaoProjeto(@RequestBody ProjetoDto projetoDto) {
+	public Projeto criacaoProjeto(@RequestBody @Valid ProjetoDto projetoDto) {
 		
 		return service.criacaoProjeto(projetoDto);
 		

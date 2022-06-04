@@ -2,6 +2,8 @@ package br.com.rotaract.secretaria.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,7 @@ public class AssociadoController {
 	private AssociadoService service;
 
 	@PostMapping
-	public Associado createAssociado(@RequestBody AssociadoDto associadoDto) {
+	public Associado createAssociado(@RequestBody @Valid AssociadoDto associadoDto) {
 		
 		return service.createAssociado(associadoDto);
 	}

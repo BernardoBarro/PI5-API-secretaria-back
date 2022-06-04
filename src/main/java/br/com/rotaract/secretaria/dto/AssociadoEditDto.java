@@ -1,21 +1,51 @@
 package br.com.rotaract.secretaria.dto;
 
 import java.time.LocalDateTime;
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 
 public class AssociadoEditDto {
 
+	@NotNull
 	private String nome;
+	
+	@NotNull
+	@Size(max = 25, message = "O campo staus deve ter no máximo 25 caracteres")
 	private StatusAssociado status;
+	
+	@NotNull
+	@Size(min = 1, max = 1)
 	private String genero;
+	
+	@NotNull
+	@Size(max = 25, message = "O campo ocupação deve ter no máximo 25 caracteres")
 	private String ocupacao;
+	
+	@NotNull
 	private LocalDateTime nascimento;
+	
+	@NotNull
 	private String cep;
+	
+	@NotNull
+	@Email(message = "O e-mail deve ser válido")
 	private String email;
+	
+	@NotNull
 	private LocalDateTime admissao;
+	
+	@NotNull
+	@Size(min = 11, max = 11)
 	private String telefone;
+	
+	@NotNull
+	@Size(max = 50, message = "O campo padrinho deve ter no máximo 50 caracteres")
 	private String padrinho;
+	
+	@NotNull
+	@Size(max = 2000, message = "O campo cargo deve ter no máximo 2000 caracteres")
 	private CargoDto cargo;
 
 	public String getNome() {

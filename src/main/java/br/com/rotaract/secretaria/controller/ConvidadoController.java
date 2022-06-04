@@ -2,6 +2,8 @@ package br.com.rotaract.secretaria.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,7 @@ public class ConvidadoController {
 	private ConvidadoService service;
 
 	@PostMapping
-	public Convidado createConvidado(@RequestBody ConvidadoDto convidadoDto) {
+	public Convidado createConvidado(@RequestBody @Valid ConvidadoDto convidadoDto) {
 
 		return service.createConvidado(convidadoDto);
 
