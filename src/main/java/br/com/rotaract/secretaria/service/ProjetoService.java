@@ -106,5 +106,14 @@ public class ProjetoService {
 		
 		return projeto;
 	}
+		
+		public void deleteProjeto(Long id) {
 
+			Optional<Projeto> optProjeto = projetoRepository.findById(id);
+			if(optProjeto.isPresent()) {
+				Projeto projeto = optProjeto.get();
+				projeto.setStatus(StatusProjeto.CANCELADO);
+				projetoRepository.save(projeto);
+		}
+	}
 }
