@@ -53,7 +53,14 @@ public class ConvidadoService {
 
 		return convidado;
 	}
+	
+	public void deleteConvidado(Long id) {
 
+		Optional<Convidado> optConvidado = convidadoRepository.findById(id);
+		if(optConvidado.isPresent()) {
+			convidadoRepository.delete(optConvidado.get());
+		}
+	}
 }
 
 

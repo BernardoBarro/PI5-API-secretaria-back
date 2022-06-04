@@ -3,11 +3,12 @@ package br.com.rotaract.secretaria.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,9 +39,9 @@ public class ConvidadoController {
 	}
 	
 	@GetMapping("/{id}")
-	public Convidado getConvidado(@PathVariable Long ri) {
+	public Convidado getConvidado(@PathVariable Long id) {
 		
-		return service.findConvidado(ri);
+		return service.findConvidado(id);
 		
 	}
 	
@@ -50,6 +51,13 @@ public class ConvidadoController {
 			@RequestBody ConvidadoDto convidadoEditDto) {
 
 		return service.updateConvidado(id, convidadoEditDto);
+
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteConvidado(@PathVariable Long id) {
+
+		service.deleteConvidado(id);
 
 	}
 

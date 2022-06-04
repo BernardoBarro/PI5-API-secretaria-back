@@ -59,6 +59,12 @@ public class ReuniaoService {
 
 		return reuniao;
 	}
+	
+	public void deleteReuniao(Long id) {
 
-
+		Optional<Reuniao> optReuniao = reuniaoRepository.findById(id);
+		if(optReuniao.isPresent()) {
+			reuniaoRepository.delete(optReuniao.get());
+		}
+	}
 }
