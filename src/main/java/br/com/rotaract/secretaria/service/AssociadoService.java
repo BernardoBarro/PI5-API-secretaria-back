@@ -25,8 +25,6 @@ import br.com.rotaract.secretaria.repository.PessoaRepository;
 @Service
 public class AssociadoService {
 	
-	private final String ASSOCIADO = "Associado";
-	
 	@Autowired
 	private AssociadoRepository associadoRepository;
 	@Autowired
@@ -60,7 +58,7 @@ public class AssociadoService {
 		
 		pessoaRepository.save(pessoa);
 		
-		Cargo cargo = cargoRepository.findByNome(ASSOCIADO);
+		Cargo cargo = cargoRepository.findByNome(associadoDto.getCargo());
 		
 		Associado associado = new Associado();
 		associado.setRI(associadoDto.getRI());
@@ -109,8 +107,8 @@ public class AssociadoService {
 		associado.getPessoa().setEmail(associadoEditDto.getEmail());
 		associado.getPessoa().setTelefone(associadoEditDto.getTelefone());
 		
-		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo().getDescricao())) {
-			Cargo cargo = cargoRepository.findByNome(associadoEditDto.getCargo().getDescricao());
+		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo())) {
+			Cargo cargo = cargoRepository.findByNome(associadoEditDto.getCargo());
 			associado.setCargo(cargo);
 		}
 		

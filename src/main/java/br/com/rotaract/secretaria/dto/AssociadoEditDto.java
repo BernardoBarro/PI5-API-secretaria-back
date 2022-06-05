@@ -52,7 +52,7 @@ public class AssociadoEditDto {
 
 	@NotNull
 	@Size(max = 2000, message = "O campo cargo deve ter no máximo 2000 caracteres")
-	private CargoDto cargo;
+	private String cargo;
 
 	public String getNome() {
 		return nome;
@@ -134,11 +134,11 @@ public class AssociadoEditDto {
 		this.padrinho = padrinho;
 	}
 
-	public CargoDto getCargo() {
+	public String getCargo() {
 		return cargo;
 	}
 
-	public void setCargo(CargoDto cargo) {
+	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
 

@@ -50,6 +50,9 @@ public class AssociadoDto {
 	@Size(max = 50, message = "O campo padrinho deve ter no máximo 50 caracteres")
 	private String padrinho;
 
+	@NotNull
+	private String cargo;
+
 	public Long getRI() {
 		return RI;
 	}
@@ -136,6 +139,14 @@ public class AssociadoDto {
 
 	public void setPadrinho(String padrinho) {
 		this.padrinho = padrinho;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 }

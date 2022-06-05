@@ -21,6 +21,7 @@ public class InstituicaoService {
 		Instituicao instituicao = new Instituicao();
 		instituicao.setNome(instituicaoDto.getNome());
 		instituicao.setContato(instituicaoDto.getContato());
+		instituicao.setDetalhes(instituicaoDto.getDetalhes());
 		
 		instituicaoRepository.save(instituicao);
 
@@ -50,6 +51,7 @@ public class InstituicaoService {
 
 		instituicao.setNome(instituicaoDto.getNome());
 		instituicao.setContato(instituicaoDto.getContato());
+		instituicao.setDetalhes(instituicaoDto.getDetalhes());
 
 		instituicaoRepository.save(instituicao);
 
