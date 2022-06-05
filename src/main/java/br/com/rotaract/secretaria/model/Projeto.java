@@ -1,6 +1,6 @@
 package br.com.rotaract.secretaria.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.rotaract.secretaria.constant.AreaEnfoque;
 import br.com.rotaract.secretaria.constant.Categoria;
@@ -37,11 +39,13 @@ public class Projeto {
 	@Column(name = "descricao_projeto")
 	private String descricao;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_inicio")
-	private LocalDateTime dataInicio;
+	private LocalDate dataInicio;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_fim")
-	private LocalDateTime dataFim;
+	private LocalDate dataFim;
 
 	@Column(name = "categoria")
 	private Categoria categoria;
@@ -57,13 +61,11 @@ public class Projeto {
 	private List<Patrocinador> patrocinadores;
 
 	@ManyToMany
-	@JoinTable(name = "projeto_instituicoes_beneficiadas", joinColumns = @JoinColumn(name = "id_projeto", referencedColumnName = "id_projeto"),
-			inverseJoinColumns=@JoinColumn(name="id_instituicao", referencedColumnName="id_instituicao"))
+	@JoinTable(name = "projeto_instituicoes_beneficiadas", joinColumns = @JoinColumn(name = "id_projeto", referencedColumnName = "id_projeto"), inverseJoinColumns = @JoinColumn(name = "id_instituicao", referencedColumnName = "id_instituicao"))
 	private List<Instituicao> instituicoes;
 
 	@ManyToMany
-	@JoinTable(name = "projeto_associado", joinColumns = @JoinColumn(name = "id_projeto", referencedColumnName = "id_projeto"),
-			inverseJoinColumns=@JoinColumn(name="id_associado", referencedColumnName="id_associado"))
+	@JoinTable(name = "projeto_associado", joinColumns = @JoinColumn(name = "id_projeto", referencedColumnName = "id_projeto"), inverseJoinColumns = @JoinColumn(name = "id_associado", referencedColumnName = "id_associado"))
 	private List<Associado> associado;
 
 	public Long getId() {
@@ -90,19 +92,19 @@ public class Projeto {
 		this.descricao = descricao;
 	}
 
-	public LocalDateTime getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDateTime dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public LocalDateTime getDataFim() {
+	public LocalDate getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(LocalDateTime dataFim) {
+	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
 
@@ -146,20 +148,12 @@ public class Projeto {
 		this.instituicoes = instituicoes;
 	}
 
-	public List<Associado> getAssociados() {
+	public List<Associado> getAssociado() {
 		return associado;
 	}
 
-	public void setAssociados(List<Associado> associados) {
-		this.associado = associados;
+	public void setAssociado(List<Associado> associado) {
+		this.associado = associado;
 	}
-
-//	@OneToOne
-//	@JoinColumn(name = "ID_CONVIDADO", nullable = false)
-//	private List<Convidado> convidados;
-//
-//	@JsonIgnore
-//	@OneToOne(mappedBy = "PROJETO")
-//	private List<Reuniao> reunioes;
 
 }

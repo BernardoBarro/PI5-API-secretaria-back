@@ -1,6 +1,6 @@
 package br.com.rotaract.secretaria.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import lombok.AllArgsConstructor;
@@ -26,8 +28,9 @@ public class Associado {
 	@Column(name = "status_associado")
 	private StatusAssociado status;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_admissao")
-	private LocalDateTime dataAdmissao;
+	private LocalDate dataAdmissao;
 
 	@Column(name = "padrinho")
 	private String padrinho;
@@ -52,15 +55,15 @@ public class Associado {
 		return status;
 	}
 
-	public void setStatus(StatusAssociado ativo) {
-		this.status = ativo;
+	public void setStatus(StatusAssociado status) {
+		this.status = status;
 	}
 
-	public LocalDateTime getDataAdmissao() {
+	public LocalDate getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(LocalDateTime dataAdmissao) {
+	public void setDataAdmissao(LocalDate dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 

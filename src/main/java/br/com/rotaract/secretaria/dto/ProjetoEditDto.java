@@ -1,10 +1,13 @@
 package br.com.rotaract.secretaria.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.rotaract.secretaria.constant.AreaEnfoque;
 import br.com.rotaract.secretaria.constant.Categoria;
 import br.com.rotaract.secretaria.constant.StatusProjeto;
@@ -17,29 +20,31 @@ public class ProjetoEditDto {
 	@NotNull
 	@Size(max = 50, message = "O campo nome deve ter no máximo 50 caracteres")
 	private String nome;
-	
+
 	@NotNull
 	@Size(max = 5000, message = "O campo descrição deve ter no máximo 5000 caracteres")
 	private String descricao;
-	
+
 	@NotNull
 	@Size(max = 50, message = "O campo categoria deve ter no máximo 50 caracteres")
 	private Categoria categoria;
-	
+
 	@NotNull
 	@Size(max = 50, message = "O campo área de enfoque deve ter no máximo 50 caracteres")
 	private AreaEnfoque areaEnfoque;
-	
+
 	@NotNull
 	@Size(max = 25, message = "O campo status deve ter no máximo 25 caracteres")
 	private StatusProjeto status;
-	
+
 	@NotNull
-	private LocalDateTime dataInicio;
-	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dataInicio;
+
 	@NotNull
-	private LocalDateTime dataFinal;
-	
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dataFinal;
+
 	private List<Patrocinador> patrocinadores;
 	private List<Instituicao> instituicao;
 	private List<Associado> associados;
@@ -84,19 +89,19 @@ public class ProjetoEditDto {
 		this.status = status;
 	}
 
-	public LocalDateTime getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDateTime dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public LocalDateTime getDataFinal() {
+	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
 
-	public void setDataFinal(LocalDateTime dataFinal) {
+	public void setDataFinal(LocalDate dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 
