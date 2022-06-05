@@ -27,6 +27,9 @@ public class Instituicao {
 	@Column(name = "Contato")
 	private String contato;
 
+	@Column(name = "DETALHES")
+	private String detalhes;
+
 	public Long getId() {
 		return id;
 	}
@@ -49,6 +52,14 @@ public class Instituicao {
 
 	public void setContato(String contato) {
 		this.contato = contato;
+	}
+
+	public String getDetalhes() {
+		return detalhes;
+	}
+
+	public void setDetalhes(String detalhes) {
+		this.detalhes = detalhes;
 	}
 
 }

@@ -1,13 +1,13 @@
 package br.com.rotaract.secretaria.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -23,8 +23,9 @@ public class Reuniao{
 	@Column(name = "id_reuniao")
 	private Long id;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_reuniao")
-	private LocalDateTime dataReuniao;
+	private LocalDate dataReuniao;
 
 	@Column(name = "assunto")
 	private String assunto;
@@ -53,11 +54,11 @@ public class Reuniao{
 		this.id = id;
 	}
 	
-	public LocalDateTime getDataReuniao() {
+	public LocalDate getDataReuniao() {
 		return dataReuniao;
 	}
 
-	public void setDataReuniao(LocalDateTime dataReuniao) {
+	public void setDataReuniao(LocalDate dataReuniao) {
 		this.dataReuniao = dataReuniao;
 	}
 	
