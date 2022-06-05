@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="02_create_cargo" author="joao">
+		<sql>
+			CREATE TABLE CARGO(
+			ID_CARGO BIGINT NOT NULL AUTO_INCREMENT,
+			ID_ACESSO BIGINT,
+			DESCRICAO_CARGO VARCHAR(2000),
+			PRIMARY KEY (ID_CARGO),
+		FOREIGN KEY (ID_ACESSO) REFERENCES ACESSO(ID_ACESSO) ON UPDATE CASCADE ON DELETE CASCADE
+		); 
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (2, 'Presidente');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (3, 'Vice-Presidente');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (4, 'Secretário');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Tesoureiro');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Protocolo');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Comunidade');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Internos');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Imagem Pública');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Finanças');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Internacionais');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'DQA');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Jurídico');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Diversidade, Equidade e Inclusão');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Profissionais');
+		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Associado');
+		</sql>
+		<rollback>
+			<sql>
+				DROP TABLE CARGO;
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

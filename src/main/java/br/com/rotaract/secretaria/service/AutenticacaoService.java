@@ -26,7 +26,7 @@ public class AutenticacaoService implements UserDetailsService{
 			Associado associado = optAssociado.get();
 			return User.withUsername(associado.getEmail())
 						.password(associado.getSenha())
-						.authorities(associado.getCargo().getNome())
+						.authorities(associado.getCargo().getAcesso().getNome())
 						.build();
 		}
 		

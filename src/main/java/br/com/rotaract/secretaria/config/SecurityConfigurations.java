@@ -31,6 +31,12 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private AssociadoRepository associadoRepository;
 	
+	private static final String ADMIN = "ADMIN";
+	private static final String PRESIDENTE = "PRESIDENTE";
+	private static final String VICE_PRESIDENTE = "VICE-PRESIDENTE";
+	private static final String SECRETARIO = "SECRETARIO";
+	private static final String ASSOCIADO = "ASSOCIADO";
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
@@ -40,9 +46,19 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/auth").permitAll()
-			.antMatchers(HttpMethod.POST, "/associado").permitAll()
-			.antMatchers("/")
-			.hasAnyAuthority("Admin")
+			.antMatchers(HttpMethod.GET, "/**")
+			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO, ASSOCIADO)
+			.antMatchers(HttpMethod.POST, "/projeto")
+			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO, ASSOCIADO)
+			//a verificação de cadastramento de edição de associado será verificado no controller
+			.antMatchers(HttpMethod.PUT, "/projeto/*", "/associado/*")
+			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO, ASSOCIADO)
+			.antMatchers(HttpMethod.POST, "/associado", "/convidado", "/instituicao", "/patrocinador")
+			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO)
+			.antMatchers(HttpMethod.PUT, "/convidado/*", "/instituicao/*", "/patrocinador/*")
+			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO)
+			.antMatchers(HttpMethod.DELETE, "/**")
+			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO)
 			.anyRequest().authenticated()
 			.and().cors().and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

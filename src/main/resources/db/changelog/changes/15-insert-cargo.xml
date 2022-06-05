@@ -8,7 +8,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 	<changeSet id="15-insert-cargo" author="Bernardo">
 		<sql>
-			insert into CARGO(DESCRICAO_CARGO) values ('Admin');
+			insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (1, 'Admin');
 		</sql>
 		<rollback>
 			<sql>

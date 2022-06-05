@@ -56,9 +56,15 @@ public class Associado implements UserDetails {
 	@JoinColumn(name = "id_cargo", nullable = false)
 	private Cargo cargo;
 
+	public Associado() {
+	}
+	
+	public Associado(Associado associado) {
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(this.cargo);
+		return List.of(this.cargo.getAcesso());
 	}
 
 	@Override

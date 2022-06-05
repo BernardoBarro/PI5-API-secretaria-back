@@ -3,6 +3,10 @@ package br.com.rotaract.secretaria.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,10 +53,14 @@ public class AssociadoController {
 	}
 	
 	@PutMapping("/{ri}")
-	public Associado updateAssociado(@PathVariable Long ri, 
-			@RequestBody AssociadoEditDto associadoEditDto) {
+	public ResponseEntity<?> updateAssociado(@PathVariable Long ri, 
+			@RequestBody AssociadoEditDto associadoEditDto, @AuthenticationPrincipal User usuarioLogado) {
 		
-		return service.updateAssociado(ri, associadoEditDto);
+		if(service.isValidAuthority(ri, usuarioLogado)) {
+			Associado associado = service.updateAssociado(ri, associadoEditDto);
+			return ResponseEntity.ok().body(new Associado(associado));
+		}
+		return new ResponseEntity<String>("Você não tem permissão", HttpStatus.FORBIDDEN);
 	}
 	
 }
