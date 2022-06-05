@@ -3,6 +3,7 @@ package br.com.rotaract.secretaria.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,10 +20,14 @@ public class AutenticacaoService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Associado> associado = associadoRepository.findByEmail(username);
+		Optional<Associado> optAssociado = associadoRepository.findByEmail(username);
 		
-		if(associado.isPresent()) {
-			return associado.get();
+		if(optAssociado.isPresent()) {
+			Associado associado = optAssociado.get();
+			return User.withUsername(associado.getEmail())
+						.password(associado.getSenha())
+						.authorities(associado.getCargo().getNome())
+						.build();
 		}
 		
 		throw new UsernameNotFoundException("Associado não encontrado");

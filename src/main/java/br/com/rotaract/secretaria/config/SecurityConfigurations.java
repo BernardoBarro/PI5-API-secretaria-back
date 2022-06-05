@@ -40,9 +40,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/auth").permitAll()
-			//Criar usuario admin e remover essa linha
 			.antMatchers(HttpMethod.POST, "/associado").permitAll()
-			.antMatchers("/").permitAll()
+			.antMatchers("/")
+			.hasAnyAuthority("Admin")
 			.anyRequest().authenticated()
 			.and().cors().and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

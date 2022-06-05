@@ -1,6 +1,6 @@
 package br.com.rotaract.secretaria.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -36,8 +37,9 @@ public class Pessoa {
 	@Column(name = "ocupacao")
 	private String ocupacao;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_nascimento")
-	private LocalDateTime nascimento;
+	private LocalDate nascimento;
 
 	@Column(name = "restricoes_medicas")
 	private String restricoesMedicas;
@@ -91,11 +93,11 @@ public class Pessoa {
 		this.ocupacao = ocupacao;
 	}
 
-	public LocalDateTime getNascimento() {
+	public LocalDate getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(LocalDateTime nascimento) {
+	public void setNascimento(LocalDate nascimento) {
 		this.nascimento = nascimento;
 	}
 

@@ -1,6 +1,8 @@
 package br.com.rotaract.secretaria.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AssociadoDto {
 
@@ -8,11 +10,13 @@ public class AssociadoDto {
 	private String nome;
 	private String genero;
 	private String ocupacao;
-	private LocalDateTime nascimento;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate nascimento;
 	private String cep;
 	private String email;
 	private String senha;
-	private LocalDateTime admissao;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate admissao;
 	private String telefone;
 	private String padrinho;
 
@@ -48,11 +52,11 @@ public class AssociadoDto {
 		this.ocupacao = ocupacao;
 	}
 
-	public LocalDateTime getNascimento() {
+	public LocalDate getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(LocalDateTime nascimento) {
+	public void setNascimento(LocalDate nascimento) {
 		this.nascimento = nascimento;
 	}
 
@@ -80,11 +84,11 @@ public class AssociadoDto {
 		this.senha = senha;
 	}
 
-	public LocalDateTime getAdmissao() {
+	public LocalDate getAdmissao() {
 		return admissao;
 	}
 
-	public void setAdmissao(LocalDateTime admissao) {
+	public void setAdmissao(LocalDate admissao) {
 		this.admissao = admissao;
 	}
 

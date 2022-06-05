@@ -1,6 +1,6 @@
 package br.com.rotaract.secretaria.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -22,7 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "associado")
 @Entity
-public class Associado implements UserDetails{
+public class Associado implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +35,9 @@ public class Associado implements UserDetails{
 	@Column(name = "status_associado")
 	private StatusAssociado status;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_admissao")
-	private LocalDateTime dataAdmissao;
+	private LocalDate dataAdmissao;
 
 	@Column(name = "padrinho")
 	private String padrinho;
@@ -104,11 +107,11 @@ public class Associado implements UserDetails{
 		this.status = status;
 	}
 
-	public LocalDateTime getDataAdmissao() {
+	public LocalDate getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(LocalDateTime dataAdmissao) {
+	public void setDataAdmissao(LocalDate dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 
@@ -150,6 +153,10 @@ public class Associado implements UserDetails{
 
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
