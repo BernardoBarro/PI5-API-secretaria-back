@@ -32,10 +32,11 @@ public class TokenService {
 		Date hoje = new Date();
 		Date expiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 		
-		Associado associado = associadoRepository.getByEmail(logado.getUsername());
+		Associado associado = associadoRepository.findByEmail(logado.getUsername()).get();
 		
 		return Jwts.builder()
 				.setIssuer("")
+				.claim(expiration, logado.getAuthorities())
 				.setSubject(associado.getRI().toString())
 				.setIssuedAt(hoje)
 				.setExpiration(expiracao)

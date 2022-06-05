@@ -12,6 +12,4 @@ public interface AssociadoRepository extends JpaRepository<Associado, Long>{
 	
 	Optional<Associado> findByEmail(String email);
 
-	Associado getByEmail(String username);
-
 }

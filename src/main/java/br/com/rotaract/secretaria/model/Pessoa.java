@@ -54,7 +54,7 @@ public class Pessoa {
 	private String cracha;
 
 	@OneToOne
-	@JoinColumn(name = "id_endereco", nullable = false)
+	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
 
 	@JsonIgnore
