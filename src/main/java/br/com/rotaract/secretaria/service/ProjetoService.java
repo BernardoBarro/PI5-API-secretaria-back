@@ -53,6 +53,7 @@ public class ProjetoService {
 		projeto.setDescricao(projetoEditDto.getDescricao());
 		projeto.setDataInicio(projetoEditDto.getDataInicio());
 		projeto.setStatus(projetoEditDto.getStatus());
+		projetoRepository.save(projeto);
 		
 		return projeto;
 	}
