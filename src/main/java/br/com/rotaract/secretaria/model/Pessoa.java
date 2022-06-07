@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -37,7 +36,6 @@ public class Pessoa {
 	@Column(name = "ocupacao")
 	private String ocupacao;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_nascimento")
 	private LocalDate nascimento;
 

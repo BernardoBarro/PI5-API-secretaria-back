@@ -11,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -30,7 +28,6 @@ public class Associado {
 	@Column(name = "status_associado")
 	private StatusAssociado status;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_admissao")
 	private LocalDate dataAdmissao;
 

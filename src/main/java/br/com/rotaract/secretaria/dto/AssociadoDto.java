@@ -6,8 +6,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class AssociadoDto {
 
 	private Long RI;
@@ -24,7 +22,6 @@ public class AssociadoDto {
 	private String ocupacao;
 
 	@NotNull
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate nascimento;
 
 	@NotNull
@@ -39,7 +36,6 @@ public class AssociadoDto {
 	private String senha;
 
 	@NotNull
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate admissao;
 
 	@NotNull

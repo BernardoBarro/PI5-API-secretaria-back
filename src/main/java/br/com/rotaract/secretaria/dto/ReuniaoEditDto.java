@@ -2,14 +2,11 @@ package br.com.rotaract.secretaria.dto;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class ReuniaoEditDto {
 		
 		private String assunto;
 		private String nome;
 		private String local;
-		@JsonFormat(pattern = "dd-MM-yyyy")
 		private LocalDate data;
 		
 		public String getAssunto() {

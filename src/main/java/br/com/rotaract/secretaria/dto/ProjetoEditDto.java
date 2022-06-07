@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import br.com.rotaract.secretaria.constant.StatusProjeto;
 
 public class ProjetoEditDto {
@@ -22,7 +20,6 @@ public class ProjetoEditDto {
 	private StatusProjeto status;
 
 	@NotNull
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataInicio;
 
 	public String getNome() {

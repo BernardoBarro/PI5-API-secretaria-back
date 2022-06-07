@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -23,7 +21,6 @@ public class Reuniao{
 	@Column(name = "id_reuniao")
 	private Long id;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_reuniao")
 	private LocalDate dataReuniao;
 
@@ -35,16 +32,6 @@ public class Reuniao{
 	
 	@Column(name = "local")
 	private String local;
-	
-	
-	/*//ainda não possui projeto e convidado
-	@OneToOne
-	@JoinColumn(name = "id_projeto", nullable = false)
-	private Projeto projeto;
- 
-	@OneToOne
-	@JoinColumn(name = "id_convidado", nullable = false)
-	private Convidado convidado;*/
 	
 	public Long getId() {
 		return id;
