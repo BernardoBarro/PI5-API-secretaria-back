@@ -58,4 +58,13 @@ public class InstituicaoService {
 		return instituicao;
 	}
 
+
+	public void deleteInstituicao(Long ri) {
+		
+		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
+		if(optInstituicao.isPresent()) {
+			instituicaoRepository.delete(optInstituicao.get());
+		}
+	}
+
 }

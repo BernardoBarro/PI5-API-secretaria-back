@@ -132,4 +132,14 @@ public class AssociadoService {
 		});
 		return listPessoasCargo;
 	}
+
+	public void deleteAssociado(Long ri) {
+
+		Optional<Associado> optAssociado = associadoRepository.findById(ri);
+		if(optAssociado.isPresent()) {
+			Associado associado = optAssociado.get();
+			associado.setStatus(StatusAssociado.DESLIGADO);
+			associadoRepository.save(associado);
+		}
+	}
 }
