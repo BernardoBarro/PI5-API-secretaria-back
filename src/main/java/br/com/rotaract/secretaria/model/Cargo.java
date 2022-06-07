@@ -5,10 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -27,10 +24,6 @@ public class Cargo {
 	@Column(name = "descricao_cargo")
 	private String nome;
 
-	@JsonIgnore
-	@OneToOne(mappedBy = "cargo")
-	private Associado associado;
-
 	public Long getId() {
 		return id;
 	}
@@ -45,14 +38,6 @@ public class Cargo {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Associado getAssociado() {
-		return associado;
-	}
-
-	public void setAssociado(Associado associado) {
-		this.associado = associado;
 	}
 
 }

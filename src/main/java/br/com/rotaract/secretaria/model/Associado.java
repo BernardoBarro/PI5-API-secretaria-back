@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -39,8 +41,8 @@ public class Associado {
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	private Pessoa pessoa;
 
-	@OneToOne
-	@JoinColumn(name = "id_cargo", nullable = false)
+	@ManyToOne
+	@JoinTable(name = "associado_cargo", joinColumns = @JoinColumn(name = "id_associado", referencedColumnName = "id_associado"), inverseJoinColumns = @JoinColumn(name = "id_cargo", referencedColumnName = "id_cargo"))
 	private Cargo cargo;
 
 	public Long getRI() {
