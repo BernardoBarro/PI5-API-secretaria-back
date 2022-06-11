@@ -6,22 +6,21 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="12_create_historico" author="joao">
+	<changeSet id="08_create_reuniao" author="joao">
 		<sql>
-			CREATE TABLE HISTORICO (
-    ID_HISTORICO BIGINT NOT NULL AUTO_INCREMENT,
-    ID_CARGO BIGINT,
-    ID_ASSOCIADO BIGINT,
-    ANO YEAR,
-    PRIMARY KEY (ID_HISTORICO),
-	FOREIGN KEY (ID_CARGO) REFERENCES CARGO(ID_CARGO) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (ID_ASSOCIADO) REFERENCES ASSOCIADO(ID_ASSOCIADO) ON UPDATE CASCADE ON DELETE CASCADE
-);
+			CREATE TABLE REUNIAO (
+    ID_REUNIAO BIGINT NOT NULL AUTO_INCREMENT,
+    DATA_REUNIAO TIMESTAMP,
+    ASSUNTO VARCHAR(1000),
+    NOME VARCHAR(50),
+    LOCAL VARCHAR(200),
+    PRIMARY KEY (ID_REUNIAO),
+); 
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE HISTORICO;
+				DROP TABLE REUNIAO;
 			</sql>
 		</rollback>
 	</changeSet>

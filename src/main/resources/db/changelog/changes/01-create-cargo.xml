@@ -10,7 +10,6 @@
 		<sql>
 			CREATE TABLE CARGO(
 			ID_CARGO BIGINT NOT NULL AUTO_INCREMENT,
-			ID_ASSOCIADO BIGINT,
 			DESCRICAO_CARGO VARCHAR(2000),
 			PRIMARY KEY (ID_CARGO)
 		); 
@@ -24,9 +23,6 @@
 		insert into CARGO(DESCRICAO_CARGO) values ('Imagem Pública');
 		insert into CARGO(DESCRICAO_CARGO) values ('Finanças');
 		insert into CARGO(DESCRICAO_CARGO) values ('Internacionais');
-		insert into CARGO(DESCRICAO_CARGO) values ('DQA');
-		insert into CARGO(DESCRICAO_CARGO) values ('Jurídico');
-		insert into CARGO(DESCRICAO_CARGO) values ('Diversidade, Equidade e Inclusão');
 		insert into CARGO(DESCRICAO_CARGO) values ('Profissionais');
 		insert into CARGO(DESCRICAO_CARGO) values ('Associado');
 		</sql>

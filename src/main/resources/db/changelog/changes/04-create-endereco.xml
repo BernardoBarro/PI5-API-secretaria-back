@@ -6,18 +6,22 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="14_create_projeto_associado" author="Bernardo">
+	<changeSet id="04_create_endereco" author="joao">
 		<sql>
-			CREATE TABLE projeto_associado (
-			    id_projeto bigint NOT NULL,
-			    id_associado bigint NOT NULL,
-			    CONSTRAINT projeto_associado_un UNIQUE (id_projeto, id_associado)
-			);
+			CREATE TABLE ENDERECO (
+			ID_ENDERECO BIGINT NOT NULL AUTO_INCREMENT,
+		    CIDADE VARCHAR(50),
+		    RUA VARCHAR(50),
+		    CEP VARCHAR(8),
+		    NUMERO INT,
+		    BAIRRO VARCHAR(50),
+			PRIMARY KEY (ID_ENDERECO)
+		);
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE projeto_associado;
+				DROP TABLE ENDERECO;
 			</sql>
 		</rollback>
 	</changeSet>
