@@ -62,6 +62,14 @@ public class Associado implements UserDetails {
 	}
 	
 	public Associado(Associado associado) {
+		this.RI = associado.getRI();
+		this.status = associado.getStatus();
+		this.dataAdmissao = associado.getDataAdmissao();
+		this.padrinho = associado.getPadrinho();
+		this.email = associado.getEmail();
+		this.senha = associado.getSenha();
+		this.pessoa = associado.getPessoa();
+		this.cargo = associado.getCargo();
 	}
 
 	@Override

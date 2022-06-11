@@ -6,18 +6,17 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="17_create_associado_cargo" author="Bernardo">
+	<changeSet id="16-insert-associado-admin" author="Bernardo">
 		<sql>
-			CREATE TABLE associado_cargo (
-			    id_associado bigint NOT NULL,
-			    id_cargo bigint NOT NULL,
-			    CONSTRAINT associado_cargo_un UNIQUE (id_associado, id_cargo)
-			);
-
+			insert into PESSOA(id_pessoa, nome) values (1, 'admin');
+			insert into ASSOCIADO(id_associado, id_cargo, id_pessoa, email, senha) values (1, 16, 1, 'bernardobarro8@gmail.com', '$2a$10$h4o22w0aI3x3AsPpOeGBeutjWvz/9VGBZzOwsRuPvFhivosyT3j5a');
+			insert into associado_cargo(id_associado, id_cargo) values (1, 16);
+			
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE associado_cargo;
+				DELETE FROM ASSOCIADO WHERE id_associado = 1;
+				DELETE FROM PESSOA WHERE id_pessoa = 1;
 			</sql>
 		</rollback>
 	</changeSet>

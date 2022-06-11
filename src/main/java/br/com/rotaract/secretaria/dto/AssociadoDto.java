@@ -3,6 +3,7 @@ package br.com.rotaract.secretaria.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AssociadoDto {
 
+	@NotNull
+	@Min(2)
 	private Long RI;
 
 	@NotNull

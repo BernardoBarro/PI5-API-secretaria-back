@@ -7,8 +7,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,8 +57,9 @@ public class AssociadoController {
 	
 	@PutMapping("/{ri}")
 	public ResponseEntity<?> updateAssociado(@PathVariable Long ri, 
-			@RequestBody AssociadoEditDto associadoEditDto, @AuthenticationPrincipal User usuarioLogado) {
-		
+			@RequestBody AssociadoEditDto associadoEditDto) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String usuarioLogado = ((UserDetails)principal).getUsername();
 		if(service.isValidAuthority(ri, usuarioLogado)) {
 			Associado associado = service.updateAssociado(ri, associadoEditDto);
 			return ResponseEntity.ok().body(new Associado(associado));

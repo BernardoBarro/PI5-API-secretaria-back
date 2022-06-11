@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +76,8 @@ public class AssociadoService {
 
 	public List<Associado> findAssociado() {
 		
-		List<Associado> associados = associadoRepository.findAll();		
+		List<Associado> associados = associadoRepository.findAll();
+		associados.remove(0);
 		
 		return associados;
 	}
@@ -135,9 +135,12 @@ public class AssociadoService {
 		return listPessoasCargo;
 	}
 
-	public boolean isValidAuthority(Long ri, User usuarioLogado) {
-		Associado associado = associadoRepository.findById(ri).get();
-		return associado.getEmail().equals(usuarioLogado.getUsername());
+	public boolean isValidAuthority(Long ri, String usuarioLogado) {
+		Associado associado = associadoRepository.findByEmail(usuarioLogado).get();
+		if(associado.getCargo().getAcesso().getNome().equals("ADMIN")) {
+			return true;
+		}
+		return associado.getRI().equals(ri);
 	}
 	
 	public void deleteAssociado(Long ri) {
