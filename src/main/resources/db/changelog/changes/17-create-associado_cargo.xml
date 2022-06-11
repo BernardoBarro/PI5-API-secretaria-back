@@ -6,7 +6,7 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="15_create_associado_cargo" author="Bernardo">
+	<changeSet id="17_create_associado_cargo" author="Bernardo">
 		<sql>
 			CREATE TABLE associado_cargo (
 			    id_associado bigint NOT NULL,

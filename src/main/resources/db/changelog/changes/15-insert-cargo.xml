@@ -12,7 +12,7 @@
 		</sql>
 		<rollback>
 			<sql>
-				DELETE FROM CARGO WHERE ID_CARGO;
+				DELETE FROM CARGO WHERE ID_CARGO = 1;
 			</sql>
 		</rollback>
 	</changeSet>

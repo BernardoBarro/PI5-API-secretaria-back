@@ -7,7 +7,7 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
     
-    autenticacao:
+autenticacao:
   jwt:
     secret: ${JWT_SECRET}
     expiration: ${JWT_EXPIRATION}
