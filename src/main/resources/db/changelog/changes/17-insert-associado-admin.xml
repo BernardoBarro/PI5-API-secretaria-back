@@ -6,20 +6,17 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="02_create_acesso" author="joao">
+	<changeSet id="16-insert-associado-admin" author="Bernardo">
 		<sql>
-			CREATE TABLE ACESSO (
-	ID_ACESSO BIGINT NOT NULL AUTO_INCREMENT,
-	ID_CARGO BIGINT,
-	TIPO_ACESSO CHAR,
-	PRIMARY KEY (ID_ACESSO),
-	FOREIGN KEY (ID_CARGO) REFERENCES CARGO(ID_CARGO) ON UPDATE CASCADE ON DELETE CASCADE
-); 
-
+			insert into PESSOA(id_pessoa, nome) values (1, 'admin');
+			insert into ASSOCIADO(id_associado, id_cargo, id_pessoa, email, senha) values (1, 16, 1, 'bernardobarro8@gmail.com', '$2a$10$h4o22w0aI3x3AsPpOeGBeutjWvz/9VGBZzOwsRuPvFhivosyT3j5a');
+			insert into associado_cargo(id_associado, id_cargo) values (1, 16);
+			
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE ACESSO;
+				DELETE FROM ASSOCIADO WHERE id_associado = 1;
+				DELETE FROM PESSOA WHERE id_pessoa = 1;
 			</sql>
 		</rollback>
 	</changeSet>

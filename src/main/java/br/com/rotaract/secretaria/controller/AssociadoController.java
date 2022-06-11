@@ -5,6 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,10 +56,15 @@ public class AssociadoController {
 	}
 	
 	@PutMapping("/{ri}")
-	public Associado updateAssociado(@PathVariable Long ri, 
+	public ResponseEntity<?> updateAssociado(@PathVariable Long ri, 
 			@RequestBody AssociadoEditDto associadoEditDto) {
-		
-		return service.updateAssociado(ri, associadoEditDto);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String usuarioLogado = ((UserDetails)principal).getUsername();
+		if(service.isValidAuthority(ri, usuarioLogado)) {
+			Associado associado = service.updateAssociado(ri, associadoEditDto);
+			return ResponseEntity.ok().body(new Associado(associado));
+		}
+		return new ResponseEntity<String>("Você não tem permissão", HttpStatus.FORBIDDEN);
 	}
 	
 	@DeleteMapping("/{ri}")

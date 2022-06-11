@@ -6,18 +6,23 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="15_create_associado_cargo" author="Bernardo">
+	<changeSet id="01_create_acesso" author="joao">
 		<sql>
-			CREATE TABLE associado_cargo (
-			    id_associado bigint NOT NULL,
-			    id_cargo bigint NOT NULL,
-			    CONSTRAINT associado_cargo_un UNIQUE (id_associado, id_cargo)
-			);
+			CREATE TABLE ACESSO (
+	ID_ACESSO BIGINT NOT NULL AUTO_INCREMENT,
+	TIPO_ACESSO VARCHAR(2000),
+	PRIMARY KEY (ID_ACESSO)
+); 
+		insert into ACESSO(TIPO_ACESSO) values ('ADMIN');
+		insert into ACESSO(TIPO_ACESSO) values ('PRESIDENTE');
+		insert into ACESSO(TIPO_ACESSO) values ('VICE-PRESIDENTE');
+		insert into ACESSO(TIPO_ACESSO) values ('SECRETARIO');
+		insert into ACESSO(TIPO_ACESSO) values ('ASSOCIADO');
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE associado_cargo;
+				DROP TABLE ACESSO;
 			</sql>
 		</rollback>
 	</changeSet>

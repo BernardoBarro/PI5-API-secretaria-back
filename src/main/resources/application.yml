@@ -7,5 +7,10 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
     
+autenticacao:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: ${JWT_EXPIRATION}
+    
 cors:
   origin: ${CORS_ORIGIN}

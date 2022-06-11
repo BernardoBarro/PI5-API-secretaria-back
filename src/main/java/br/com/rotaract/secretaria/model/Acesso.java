@@ -5,37 +5,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cargo")
+@Table(name = "ACESSO")
 @Entity
-public class Cargo {
+public class Acesso implements GrantedAuthority {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_cargo")
+	@Column(name = "ID_ACESSO")
 	private Long id;
 
-	@Column(name = "descricao_cargo")
+	@Column(name = "TIPO_ACESSO")
 	private String nome;
 
-//verificar
-	@JsonIgnore
-	@OneToOne(mappedBy = "cargo")
-	private Associado associado;
-
-	@OneToOne
-	@JoinColumn(name = "id_acesso", nullable = false)
-	private Acesso acesso;
+	@Override
+	public String getAuthority() {
+		return this.nome;
+	}
 
 	public Long getId() {
 		return id;
@@ -53,20 +49,8 @@ public class Cargo {
 		this.nome = nome;
 	}
 
-	public Associado getAssociado() {
-		return associado;
-	}
-
-	public void setAssociado(Associado associado) {
-		this.associado = associado;
-	}
-
-	public Acesso getAcesso() {
-		return acesso;
-	}
-
-	public void setAcesso(Acesso acesso) {
-		this.acesso = acesso;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

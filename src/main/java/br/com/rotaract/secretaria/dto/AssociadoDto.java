@@ -3,11 +3,16 @@ package br.com.rotaract.secretaria.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class AssociadoDto {
 
+	@NotNull
+	@Min(2)
 	private Long RI;
 
 	@NotNull
@@ -21,7 +26,7 @@ public class AssociadoDto {
 	@Size(max = 25, message = "O campo ocupação deve ter no máximo 25 caracteres")
 	private String ocupacao;
 
-	@NotNull
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate nascimento;
 
 	@NotNull
@@ -35,7 +40,7 @@ public class AssociadoDto {
 	@Size(max = 25, message = "O campo senha deve ter no máximo 25 caracteres")
 	private String senha;
 
-	@NotNull
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate admissao;
 
 	@NotNull

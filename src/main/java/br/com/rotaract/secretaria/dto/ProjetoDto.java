@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ProjetoDto {
 
 	@NotNull
@@ -16,6 +18,7 @@ public class ProjetoDto {
 	private String descricao;
 
 	@NotNull
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataInicio;
 
 	public String getNome() {

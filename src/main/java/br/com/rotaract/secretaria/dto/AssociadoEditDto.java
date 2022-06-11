@@ -6,6 +6,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 
 public class AssociadoEditDto {
@@ -25,7 +27,7 @@ public class AssociadoEditDto {
 	@Size(max = 25, message = "O campo ocupação deve ter no máximo 25 caracteres")
 	private String ocupacao;
 
-	@NotNull
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate nascimento;
 
 	@NotNull
@@ -35,7 +37,7 @@ public class AssociadoEditDto {
 	@Email(message = "O e-mail deve ser válido")
 	private String email;
 
-	@NotNull
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate admissao;
 
 	@NotNull

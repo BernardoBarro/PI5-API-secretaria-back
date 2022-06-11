@@ -6,27 +6,13 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="06_create_pessoa" author="joao">
+	<changeSet id="15-insert-cargo" author="Bernardo">
 		<sql>
-			CREATE TABLE PESSOA (
-			ID_PESSOA BIGINT NOT NULL AUTO_INCREMENT,
-			ID_ENDERECO BIGINT, 
-			NOME VARCHAR(50),
-			GENERO CHAR(1),
-			OCUPACAO VARCHAR(25),
-			DATA_NASCIMENTO DATE,
-			RESTRICOES_MEDICAS VARCHAR(50),
-		    TELEFONE VARCHAR(11),
-		    CPF VARCHAR(11),
-		    NOME_CRACHA VARCHAR(50),
-			PRIMARY KEY (ID_PESSOA),
-			FOREIGN KEY (ID_ENDERECO) REFERENCES ENDERECO(ID_ENDERECO) ON UPDATE CASCADE ON DELETE CASCADE
-		);
-
+			insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (1, 'Admin');
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE PESSOA;
+				DELETE FROM CARGO WHERE ID_CARGO = 1;
 			</sql>
 		</rollback>
 	</changeSet>

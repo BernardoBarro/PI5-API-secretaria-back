@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.client.ViaCepClient;
@@ -51,9 +52,7 @@ public class AssociadoService {
 		pessoa.setGenero(associadoDto.getGenero());
 		pessoa.setOcupacao(associadoDto.getOcupacao());
 		pessoa.setNascimento(associadoDto.getNascimento());
-		pessoa.setEmail(associadoDto.getEmail());
 		pessoa.setTelefone(associadoDto.getTelefone());
-		pessoa.setSenha(associadoDto.getSenha());
 		pessoa.setEndereco(endereco);
 		
 		pessoaRepository.save(pessoa);
@@ -65,6 +64,8 @@ public class AssociadoService {
 		associado.setStatus(StatusAssociado.ATIVO);
 		associado.setDataAdmissao(associadoDto.getAdmissao());
 		associado.setPadrinho(associadoDto.getPadrinho());
+		associado.setEmail(associadoDto.getEmail());
+		associado.setSenha(new BCryptPasswordEncoder().encode(associadoDto.getSenha()));
 		associado.setPessoa(pessoa);
 		associado.setCargo(cargo);
 		
@@ -75,7 +76,8 @@ public class AssociadoService {
 
 	public List<Associado> findAssociado() {
 		
-		List<Associado> associados = associadoRepository.findAll();		
+		List<Associado> associados = associadoRepository.findAll();
+		associados.remove(0);
 		
 		return associados;
 	}
@@ -104,7 +106,6 @@ public class AssociadoService {
 		associado.getPessoa().setGenero(associadoEditDto.getGenero());
 		associado.getPessoa().setOcupacao(associadoEditDto.getOcupacao());
 		associado.getPessoa().setNascimento(associadoEditDto.getNascimento());
-		associado.getPessoa().setEmail(associadoEditDto.getEmail());
 		associado.getPessoa().setTelefone(associadoEditDto.getTelefone());
 		
 		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo())) {
@@ -115,6 +116,7 @@ public class AssociadoService {
 		associado.setStatus(associadoEditDto.getStatus());
 		associado.setDataAdmissao(associadoEditDto.getAdmissao());
 		associado.setPadrinho(associadoEditDto.getPadrinho());
+		associado.setEmail(associadoEditDto.getEmail());
 		
 		associadoRepository.save(associado);
 		
@@ -133,6 +135,14 @@ public class AssociadoService {
 		return listPessoasCargo;
 	}
 
+	public boolean isValidAuthority(Long ri, String usuarioLogado) {
+		Associado associado = associadoRepository.findByEmail(usuarioLogado).get();
+		if(associado.getCargo().getAcesso().getNome().equals("ADMIN")) {
+			return true;
+		}
+		return associado.getRI().equals(ri);
+	}
+	
 	public void deleteAssociado(Long ri) {
 
 		Optional<Associado> optAssociado = associadoRepository.findById(ri);

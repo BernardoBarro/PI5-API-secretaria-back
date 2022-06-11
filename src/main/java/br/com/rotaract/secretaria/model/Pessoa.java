@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -36,14 +37,12 @@ public class Pessoa {
 	@Column(name = "ocupacao")
 	private String ocupacao;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "data_nascimento")
 	private LocalDate nascimento;
 
 	@Column(name = "restricoes_medicas")
 	private String restricoesMedicas;
-
-	@Column(name = "email")
-	private String email;
 
 	@Column(name = "telefone")
 	private String telefone;
@@ -54,11 +53,8 @@ public class Pessoa {
 	@Column(name = "nome_cracha")
 	private String cracha;
 
-	@Column(name = "senha")
-	private String senha;
-
 	@OneToOne
-	@JoinColumn(name = "id_endereco", nullable = false)
+	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
 
 	@JsonIgnore
@@ -113,14 +109,6 @@ public class Pessoa {
 		this.restricoesMedicas = restricoesMedicas;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
@@ -143,14 +131,6 @@ public class Pessoa {
 
 	public void setCracha(String cracha) {
 		this.cracha = cracha;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public Endereco getEndereco() {

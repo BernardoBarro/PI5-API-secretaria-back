@@ -6,27 +6,18 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="06_create_pessoa" author="joao">
+	<changeSet id="16_create_associado_cargo" author="Bernardo">
 		<sql>
-			CREATE TABLE PESSOA (
-			ID_PESSOA BIGINT NOT NULL AUTO_INCREMENT,
-			ID_ENDERECO BIGINT, 
-			NOME VARCHAR(50),
-			GENERO CHAR(1),
-			OCUPACAO VARCHAR(25),
-			DATA_NASCIMENTO DATE,
-			RESTRICOES_MEDICAS VARCHAR(50),
-		    TELEFONE VARCHAR(11),
-		    CPF VARCHAR(11),
-		    NOME_CRACHA VARCHAR(50),
-			PRIMARY KEY (ID_PESSOA),
-			FOREIGN KEY (ID_ENDERECO) REFERENCES ENDERECO(ID_ENDERECO) ON UPDATE CASCADE ON DELETE CASCADE
-		);
+			CREATE TABLE associado_cargo (
+			    id_associado bigint NOT NULL,
+			    id_cargo bigint NOT NULL,
+			    CONSTRAINT associado_cargo_un UNIQUE (id_associado, id_cargo)
+			);
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE PESSOA;
+				DROP TABLE associado_cargo;
 			</sql>
 		</rollback>
 	</changeSet>
