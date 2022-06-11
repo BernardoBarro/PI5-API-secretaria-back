@@ -2,7 +2,10 @@ package br.com.rotaract.secretaria.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +27,7 @@ public class ProjetoController {
 	private ProjetoService service;
 
 	@PostMapping
-	public Projeto criacaoProjeto(@RequestBody ProjetoDto projetoDto) {
+	public Projeto criacaoProjeto(@RequestBody @Valid ProjetoDto projetoDto) {
 		
 		return service.criacaoProjeto(projetoDto);
 		
@@ -50,6 +53,12 @@ public class ProjetoController {
 		
 		return service.atualizaProjeto(id, projetoEditDto);
 		
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteProjeto(@PathVariable Long id) {
+		
+		service.deleteProjeto(id);
 	}
 	
 }

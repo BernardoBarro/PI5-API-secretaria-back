@@ -11,3 +11,6 @@ autenticacao:
   jwt:
     secret: A7%D@XGK=E#fP362c*KD
     expiration: 86400000
+    
+cors:
+  origin: http://localhost:8081

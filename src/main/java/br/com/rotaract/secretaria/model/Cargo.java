@@ -20,8 +20,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Cargo {
 
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cargo")
@@ -30,6 +28,7 @@ public class Cargo {
 	@Column(name = "descricao_cargo")
 	private String nome;
 
+//verificar
 	@JsonIgnore
 	@OneToOne(mappedBy = "cargo")
 	private Associado associado;
@@ -68,10 +67,6 @@ public class Cargo {
 
 	public void setAcesso(Acesso acesso) {
 		this.acesso = acesso;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 }

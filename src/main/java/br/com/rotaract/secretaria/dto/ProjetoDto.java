@@ -1,22 +1,22 @@
 package br.com.rotaract.secretaria.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 
-import br.com.rotaract.secretaria.constant.AreaEnfoque;
-import br.com.rotaract.secretaria.constant.Categoria;
-import br.com.rotaract.secretaria.model.Instituicao;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class ProjetoDto {
 
+	@NotNull
+	@Size(max = 50, message = "O campo nome deve ter no máximo 50 caracteres")
 	private String nome;
+
+	@NotNull
+	@Size(max = 5000, message = "O campo descrição deve ter no máximo 5000 caracteres")
 	private String descricao;
-	private Categoria categoria;
-	private AreaEnfoque areaEnfoque;
-	private LocalDateTime dataInicio;
-	private LocalDateTime dataFinal;
-	private List<PatrocinadorDto> patrocinadores;
-	private List<Instituicao> instituicoes;
+
+	@NotNull
+	private LocalDate dataInicio;
 
 	public String getNome() {
 		return nome;
@@ -34,52 +34,12 @@ public class ProjetoDto {
 		this.descricao = descricao;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public AreaEnfoque getAreaEnfoque() {
-		return areaEnfoque;
-	}
-
-	public void setAreaEnfoque(AreaEnfoque areaEnfoque) {
-		this.areaEnfoque = areaEnfoque;
-	}
-
-	public LocalDateTime getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDateTime dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
-	}
-
-	public LocalDateTime getDataFinal() {
-		return dataFinal;
-	}
-
-	public void setDataFinal(LocalDateTime dataFinal) {
-		this.dataFinal = dataFinal;
-	}
-
-	public List<PatrocinadorDto> getPatrocinadores() {
-		return patrocinadores;
-	}
-
-	public void setPatrocinadores(List<PatrocinadorDto> patrocinadores) {
-		this.patrocinadores = patrocinadores;
-	}
-
-	public List<Instituicao> getInstituicoes() {
-		return instituicoes;
-	}
-
-	public void setInstituicoes(List<Instituicao> instituicoes) {
-		this.instituicoes = instituicoes;
 	}
 
 }

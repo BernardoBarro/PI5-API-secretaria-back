@@ -56,5 +56,11 @@ public class PatrocinadorService {
 
 		return patrocinador;
 	}
+	public void deletePatrocinador(Long ri) {
 
+		Optional<Patrocinador> optPatrocinador = patrocinadorRepository.findById(ri);
+		if(optPatrocinador.isPresent()) {
+			patrocinadorRepository.delete(optPatrocinador.get());
+		}
+	}
 }

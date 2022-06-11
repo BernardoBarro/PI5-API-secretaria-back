@@ -27,8 +27,6 @@ import br.com.rotaract.secretaria.repository.PessoaRepository;
 @Service
 public class AssociadoService {
 	
-	private final String ASSOCIADO = "Associado";
-	
 	@Autowired
 	private AssociadoRepository associadoRepository;
 	@Autowired
@@ -60,7 +58,7 @@ public class AssociadoService {
 		
 		pessoaRepository.save(pessoa);
 		
-		Cargo cargo = cargoRepository.findByNome(ASSOCIADO);
+		Cargo cargo = cargoRepository.findByNome(associadoDto.getCargo());
 		
 		Associado associado = new Associado();
 		associado.setRI(associadoDto.getRI());
@@ -110,8 +108,8 @@ public class AssociadoService {
 		associado.getPessoa().setNascimento(associadoEditDto.getNascimento());
 		associado.getPessoa().setTelefone(associadoEditDto.getTelefone());
 		
-		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo().getDescricao())) {
-			Cargo cargo = cargoRepository.findByNome(associadoEditDto.getCargo().getDescricao());
+		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo())) {
+			Cargo cargo = cargoRepository.findByNome(associadoEditDto.getCargo());
 			associado.setCargo(cargo);
 		}
 		
@@ -140,5 +138,15 @@ public class AssociadoService {
 	public boolean isValidAuthority(Long ri, User usuarioLogado) {
 		Associado associado = associadoRepository.findById(ri).get();
 		return associado.getEmail().equals(usuarioLogado.getUsername());
+	}
+	
+	public void deleteAssociado(Long ri) {
+
+		Optional<Associado> optAssociado = associadoRepository.findById(ri);
+		if(optAssociado.isPresent()) {
+			Associado associado = optAssociado.get();
+			associado.setStatus(StatusAssociado.DESLIGADO);
+			associadoRepository.save(associado);
+		}
 	}
 }

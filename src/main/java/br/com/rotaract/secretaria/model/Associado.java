@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,10 +43,10 @@ public class Associado implements UserDetails {
 
 	@Column(name = "padrinho")
 	private String padrinho;
-
+	
 	@Column(name = "email")
 	private String email;
-
+	
 	@Column(name = "senha")
 	private String senha;
 
@@ -52,8 +54,8 @@ public class Associado implements UserDetails {
 	@JoinColumn(name = "id_pessoa", nullable = false)
 	private Pessoa pessoa;
 
-	@OneToOne
-	@JoinColumn(name = "id_cargo", nullable = false)
+	@ManyToOne
+	@JoinTable(name = "associado_cargo", joinColumns = @JoinColumn(name = "id_associado", referencedColumnName = "id_associado"), inverseJoinColumns = @JoinColumn(name = "id_cargo", referencedColumnName = "id_cargo"))
 	private Cargo cargo;
 
 	public Associado() {
@@ -109,8 +111,8 @@ public class Associado implements UserDetails {
 		return status;
 	}
 
-	public void setStatus(StatusAssociado status) {
-		this.status = status;
+	public void setStatus(StatusAssociado ativo) {
+		this.status = ativo;
 	}
 
 	public LocalDate getDataAdmissao() {
