@@ -5,15 +5,20 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.client.ViaCepClient;
 import br.com.rotaract.secretaria.constant.StatusAssociado;
+import br.com.rotaract.secretaria.dto.AlterarSenhaDto;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.dto.AssociadoEditDto;
+import br.com.rotaract.secretaria.dto.LoginDto;
 import br.com.rotaract.secretaria.dto.PessoaCargo;
 import br.com.rotaract.secretaria.dto.ViaCepObject;
+import br.com.rotaract.secretaria.exceptions.SenhaInvalida;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.model.Cargo;
 import br.com.rotaract.secretaria.model.Endereco;
@@ -22,13 +27,13 @@ import br.com.rotaract.secretaria.repository.AssociadoRepository;
 import br.com.rotaract.secretaria.repository.CargoRepository;
 import br.com.rotaract.secretaria.repository.EnderecoRepository;
 import br.com.rotaract.secretaria.repository.PessoaRepository;
-import br.com.rotaract.secretaria.utils.BuildError;
+import br.com.rotaract.secretaria.utils.Validation;
 
 @Service
 public class AssociadoService {
-
-	private final static String NOT_FOUND_ASSOCIADO = "O associado não existe";
-	private final static String NOT_FOUND_CARGO = "O cargo não existe";
+	
+	private static final String NOT_FOUND_ASSOCIADO = "O associado não existe";
+	private static final String NOT_FOUND_CARGO = "O cargo não existe";
 	
 	@Autowired
 	private AssociadoRepository associadoRepository;
@@ -40,14 +45,16 @@ public class AssociadoService {
 	private EnderecoRepository enderecoRepository;
 	@Autowired
 	private ViaCepClient client;
+	@Autowired
+	private AuthenticationManager authManager;
 
 	public Associado createAssociado(AssociadoDto associadoDto) {
 
 		Optional<Associado> optAssociado = associadoRepository.findById(associadoDto.getRI());
-		BuildError.buildAssociadoExiste(optAssociado, "O associado já existe");
+		Validation.buildAssociadoExiste(optAssociado, "O associado já existe");
 		
 		Optional<Cargo> optCargo = cargoRepository.findByNome(associadoDto.getCargo());
-		BuildError.buildNotFoundException(optCargo, NOT_FOUND_CARGO);
+		Validation.validReturnObject(optCargo, NOT_FOUND_CARGO);
 
 		Endereco endereco = new Endereco();
 		ViaCepObject viaCep = client.getEndereco(associadoDto.getCep());
@@ -94,7 +101,7 @@ public class AssociadoService {
 	public Associado findAssociado(Long ri) {
 		
 		Optional<Associado> optAssociado = associadoRepository.findById(ri);
-		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
+		Validation.validReturnObject(optAssociado, NOT_FOUND_ASSOCIADO);
 
 		return optAssociado.get();
 	}
@@ -102,12 +109,12 @@ public class AssociadoService {
 	public Associado updateAssociado(Long ri, AssociadoEditDto associadoEditDto) {
 
 		Optional<Associado> optAssociado = associadoRepository.findById(ri);
-		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
+		Validation.validReturnObject(optAssociado, NOT_FOUND_ASSOCIADO);
 		Associado associado = optAssociado.get();
 		
 		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo())) {
 			Optional<Cargo> optCargo = cargoRepository.findByNome(associadoEditDto.getCargo());
-			BuildError.buildNotFoundException(optCargo, NOT_FOUND_CARGO);
+			Validation.validReturnObject(optCargo, NOT_FOUND_CARGO);
 			associado.setCargo(optCargo.get());
 		}
 		
@@ -149,7 +156,7 @@ public class AssociadoService {
 
 	public boolean isValidAuthority(Long ri, String usuarioLogado) {
 		Optional<Associado> optAssociado = associadoRepository.findByEmail(usuarioLogado);
-		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
+		Validation.validReturnObject(optAssociado, NOT_FOUND_ASSOCIADO);
 		Associado associado = optAssociado.get();
 		if(associado.getCargo().getAcesso().getNome().equals("ADMIN")) {
 			return true;
@@ -158,11 +165,31 @@ public class AssociadoService {
 	}
 	
 	public void deleteAssociado(Long ri) {
-
 		Optional<Associado> optAssociado = associadoRepository.findById(ri);
-		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
+		Validation.validReturnObject(optAssociado, NOT_FOUND_ASSOCIADO);
 		Associado associado = optAssociado.get();
 		associado.setStatus(StatusAssociado.DESLIGADO);
 		associadoRepository.save(associado);
+	}
+
+	public Associado updateSenha(Long ri, AlterarSenhaDto alterarSenhaDto) {
+		Optional<Associado> optAssociado = associadoRepository.findById(ri);
+		Validation.validReturnObject(optAssociado, NOT_FOUND_ASSOCIADO);
+		Associado associado = optAssociado.get();
+		validSenha(alterarSenhaDto, associado);
+		Validation.novaSenha(alterarSenhaDto);
+		associado.setSenha(alterarSenhaDto.getNovaSenha());
+		associadoRepository.save(associado);
+		return associado;
+	}
+
+	private void validSenha(AlterarSenhaDto alterarSenhaDto, Associado associado) {
+		try {
+			LoginDto loginDto = new LoginDto(associado.getEmail(), alterarSenhaDto.getSenhaAtual());
+			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = loginDto.converter();
+			authManager.authenticate(usernamePasswordAuthenticationToken);
+		}catch(Exception e) {
+			throw new SenhaInvalida("A senha está errada");
+		}
 	}
 }

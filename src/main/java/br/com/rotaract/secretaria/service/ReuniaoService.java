@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.rotaract.secretaria.dto.ReuniaoDto;
 import br.com.rotaract.secretaria.model.Reuniao;
 import br.com.rotaract.secretaria.repository.ReuniaoRepository;
-import br.com.rotaract.secretaria.utils.BuildError;
+import br.com.rotaract.secretaria.utils.Validation;
 
 @Service
 public class ReuniaoService {
@@ -39,7 +39,7 @@ public class ReuniaoService {
 	public Reuniao findReuniao(Long id) {
 		
 		Optional<Reuniao> optReuniao = reuniaoRepository.findById(id);
-		BuildError.buildNotFoundException(optReuniao, NOT_FOUND);
+		Validation.validReturnObject(optReuniao, NOT_FOUND);
 
 		return optReuniao.get();
 	}
@@ -48,7 +48,7 @@ public class ReuniaoService {
 	public Reuniao updateReuniao(Long id, ReuniaoDto reuniaoDto) {
 
 		Optional<Reuniao> optReuniao = reuniaoRepository.findById(id);
-		BuildError.buildNotFoundException(optReuniao, NOT_FOUND);
+		Validation.validReturnObject(optReuniao, NOT_FOUND);
 		Reuniao reuniao = optReuniao.get();
 		
 
@@ -65,7 +65,7 @@ public class ReuniaoService {
 	public void deleteReuniao(Long id) {
 
 		Optional<Reuniao> optReuniao = reuniaoRepository.findById(id);
-		BuildError.buildNotFoundException(optReuniao, NOT_FOUND);
+		Validation.validReturnObject(optReuniao, NOT_FOUND);
 		reuniaoRepository.delete(optReuniao.get());
 	}
 }

@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.repository.AssociadoRepository;
 import br.com.rotaract.secretaria.service.TokenService;
-import br.com.rotaract.secretaria.utils.BuildError;
+import br.com.rotaract.secretaria.utils.Validation;
 
 public class AutenticacaoTokenFilter extends OncePerRequestFilter{
 
@@ -43,7 +43,7 @@ public class AutenticacaoTokenFilter extends OncePerRequestFilter{
 	private void autenticarAssociado(String token) {
 		Long idAssociado = tokenService.getIdAssociado(token);
 		Optional<Associado> optAssociado = associadoRepository.findById(idAssociado);
-		BuildError.buildNotFoundException(optAssociado, "O associado não existe");
+		Validation.validReturnObject(optAssociado, "O associado não existe");
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(optAssociado.get(), null, optAssociado.get().getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}

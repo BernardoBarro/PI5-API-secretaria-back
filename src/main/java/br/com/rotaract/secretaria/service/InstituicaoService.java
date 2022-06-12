@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.rotaract.secretaria.dto.InstituicaoDto;
 import br.com.rotaract.secretaria.model.Instituicao;
 import br.com.rotaract.secretaria.repository.InstituicaoRepository;
-import br.com.rotaract.secretaria.utils.BuildError;
+import br.com.rotaract.secretaria.utils.Validation;
 
 @Service
 public class InstituicaoService {
@@ -38,7 +38,7 @@ public class InstituicaoService {
 	public Instituicao findInstituicao(Long ri) {
 		
 		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
-		BuildError.buildNotFoundException(optInstituicao, NOT_FOUND);
+		Validation.validReturnObject(optInstituicao, NOT_FOUND);
 
 		return optInstituicao.get();
 	}
@@ -46,7 +46,7 @@ public class InstituicaoService {
 	public Instituicao updateInstituicao(Long ri, InstituicaoDto instituicaoDto) {
 
 		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
-		BuildError.buildNotFoundException(optInstituicao, NOT_FOUND);
+		Validation.validReturnObject(optInstituicao, NOT_FOUND);
 		Instituicao instituicao = optInstituicao.get();
 
 		instituicao.setNome(instituicaoDto.getNome());
@@ -61,7 +61,7 @@ public class InstituicaoService {
 	public void deleteInstituicao(Long ri) {
 		
 		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
-		BuildError.buildNotFoundException(optInstituicao, NOT_FOUND);
+		Validation.validReturnObject(optInstituicao, NOT_FOUND);
 		instituicaoRepository.delete(optInstituicao.get());
 	}
 

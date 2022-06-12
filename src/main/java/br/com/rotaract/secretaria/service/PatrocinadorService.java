@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.rotaract.secretaria.dto.PatrocinadorDto;
 import br.com.rotaract.secretaria.model.Patrocinador;
 import br.com.rotaract.secretaria.repository.PatrocinadorRepository;
-import br.com.rotaract.secretaria.utils.BuildError;
+import br.com.rotaract.secretaria.utils.Validation;
 
 @Service
 public class PatrocinadorService {
@@ -38,7 +38,7 @@ public class PatrocinadorService {
 	public Patrocinador findPatrocinador(Long id) {
 		
 		Optional<Patrocinador> optPatrocinador = patrocinadorRepository.findById(id);
-		BuildError.buildNotFoundException(optPatrocinador, NOT_FOUND);
+		Validation.validReturnObject(optPatrocinador, NOT_FOUND);
 
 		return optPatrocinador.get();
 	}
@@ -46,7 +46,7 @@ public class PatrocinadorService {
 	public Patrocinador updatePatrocinador(Long id, PatrocinadorDto patrocinadorDto) {
 
 		Optional<Patrocinador> optPatrocinador = patrocinadorRepository.findById(id);
-		BuildError.buildNotFoundException(optPatrocinador, NOT_FOUND);
+		Validation.validReturnObject(optPatrocinador, NOT_FOUND);
 		Patrocinador patrocinador = optPatrocinador.get();
 
 		patrocinador.setValorDecimal(patrocinadorDto.getValorDecimal());
@@ -62,7 +62,7 @@ public class PatrocinadorService {
 	public void deletePatrocinador(Long ri) {
 
 		Optional<Patrocinador> optPatrocinador = patrocinadorRepository.findById(ri);
-		BuildError.buildNotFoundException(optPatrocinador, NOT_FOUND);
+		Validation.validReturnObject(optPatrocinador, NOT_FOUND);
 		patrocinadorRepository.delete(optPatrocinador.get());
 	}
 }

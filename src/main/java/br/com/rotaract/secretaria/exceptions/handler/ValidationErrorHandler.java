@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import br.com.rotaract.secretaria.exceptions.AssociadoJaExisteException;
 import br.com.rotaract.secretaria.exceptions.ExceptionResponse;
 import br.com.rotaract.secretaria.exceptions.NotFoundException;
+import br.com.rotaract.secretaria.exceptions.SenhaInvalida;
 import br.com.rotaract.secretaria.exceptions.UnauthorizedException;
 import feign.FeignException;
 
@@ -61,6 +62,14 @@ public class ValidationErrorHandler{
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}
 	
+	@ExceptionHandler(SenhaInvalida.class)
+	public ResponseEntity<ExceptionResponse> senhaInvalida(SenhaInvalida ex, HttpServletRequest request) {
+		
+		ExceptionResponse erro = buildExceptionResponse(HttpStatus.NOT_FOUND, ex.getMsg(), ex.getMsg(), request);
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
 	@ExceptionHandler(AssociadoJaExisteException.class)
 	public ResponseEntity<ExceptionResponse> found(AssociadoJaExisteException ex, HttpServletRequest request) {
 		
@@ -78,7 +87,7 @@ public class ValidationErrorHandler{
 	}
 	
 	@ExceptionHandler(UsernameNotFoundException.class)
-	public ResponseEntity<ExceptionResponse> unauthorized(UsernameNotFoundException ex, HttpServletRequest request) {
+	public ResponseEntity<ExceptionResponse> usernameNotFound(UsernameNotFoundException ex, HttpServletRequest request) {
 		
 		ExceptionResponse erro = buildExceptionResponse(HttpStatus.FORBIDDEN, ex.getLocalizedMessage(), ex.getMessage(), request);
 		

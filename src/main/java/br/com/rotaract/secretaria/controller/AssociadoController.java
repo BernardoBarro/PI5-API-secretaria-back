@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.rotaract.secretaria.dto.AlterarSenhaDto;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.dto.AssociadoEditDto;
 import br.com.rotaract.secretaria.dto.PessoaCargo;
@@ -63,6 +64,18 @@ public class AssociadoController {
 		String usuarioLogado = ((UserDetails)principal).getUsername();
 		if(service.isValidAuthority(ri, usuarioLogado)) {
 			Associado associado = service.updateAssociado(ri, associadoEditDto);
+			return ResponseEntity.ok().body(new Associado(associado));
+		}
+		throw new UnauthorizedException("Você não tem permissão");
+	}
+	
+	@PutMapping("/senha/{ri}")
+	public ResponseEntity<Associado> updateSenha(@PathVariable Long ri,
+			@RequestBody AlterarSenhaDto alterarSenhaDto) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String usuarioLogado = ((UserDetails)principal).getUsername();
+		if(service.isValidAuthority(ri, usuarioLogado)) {
+			Associado associado = service.updateSenha(ri, alterarSenhaDto);
 			return ResponseEntity.ok().body(new Associado(associado));
 		}
 		throw new UnauthorizedException("Você não tem permissão");

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.repository.AssociadoRepository;
-import br.com.rotaract.secretaria.utils.BuildError;
+import br.com.rotaract.secretaria.utils.Validation;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -35,7 +35,7 @@ public class TokenService {
 		Date expiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 		
 		Optional<Associado> optAssociado = associadoRepository.findByEmail(logado.getUsername());
-		BuildError.buildNotFoundException(optAssociado, "O associado não existe");
+		Validation.validReturnObject(optAssociado, "O associado não existe");
 		Associado associado = optAssociado.get();
 		
 		return Jwts.builder()

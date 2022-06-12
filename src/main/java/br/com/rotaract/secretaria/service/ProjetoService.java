@@ -11,7 +11,7 @@ import br.com.rotaract.secretaria.dto.ProjetoDto;
 import br.com.rotaract.secretaria.dto.ProjetoEditDto;
 import br.com.rotaract.secretaria.model.Projeto;
 import br.com.rotaract.secretaria.repository.ProjetoRepository;
-import br.com.rotaract.secretaria.utils.BuildError;
+import br.com.rotaract.secretaria.utils.Validation;
 
 @Service
 public class ProjetoService {
@@ -41,7 +41,7 @@ public class ProjetoService {
 	public Projeto findProjeto(Long ri) {
 		
 		Optional<Projeto> optProjeto = projetoRepository.findById(ri);
-		BuildError.buildNotFoundException(optProjeto, NOT_FOUND);
+		Validation.validReturnObject(optProjeto, NOT_FOUND);
 
 		return optProjeto.get();
 	}
@@ -49,7 +49,7 @@ public class ProjetoService {
 	public Projeto updateProjeto(Long id, ProjetoEditDto projetoEditDto) {
 
 		Optional<Projeto> optProjeto = projetoRepository.findById(id);
-		BuildError.buildNotFoundException(optProjeto, NOT_FOUND);
+		Validation.validReturnObject(optProjeto, NOT_FOUND);
 		Projeto projeto = optProjeto.get();
 		
 		projeto.setNome(projetoEditDto.getNome());
@@ -64,7 +64,7 @@ public class ProjetoService {
 		public void deleteProjeto(Long id) {
 
 			Optional<Projeto> optProjeto = projetoRepository.findById(id);
-			BuildError.buildNotFoundException(optProjeto, NOT_FOUND);
+			Validation.validReturnObject(optProjeto, NOT_FOUND);
 			Projeto projeto = optProjeto.get();
 			projeto.setStatus(StatusProjeto.CANCELADO);
 			projetoRepository.save(projeto);
