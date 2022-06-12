@@ -22,9 +22,13 @@ import br.com.rotaract.secretaria.repository.AssociadoRepository;
 import br.com.rotaract.secretaria.repository.CargoRepository;
 import br.com.rotaract.secretaria.repository.EnderecoRepository;
 import br.com.rotaract.secretaria.repository.PessoaRepository;
+import br.com.rotaract.secretaria.utils.BuildError;
 
 @Service
 public class AssociadoService {
+
+	private final static String NOT_FOUND_ASSOCIADO = "O associado não existe";
+	private final static String NOT_FOUND_CARGO = "O cargo não existe";
 	
 	@Autowired
 	private AssociadoRepository associadoRepository;
@@ -38,6 +42,13 @@ public class AssociadoService {
 	private ViaCepClient client;
 
 	public Associado createAssociado(AssociadoDto associadoDto) {
+
+		Optional<Associado> optAssociado = associadoRepository.findById(associadoDto.getRI());
+		BuildError.buildAssociadoExiste(optAssociado, "O associado já existe");
+		
+		Optional<Cargo> optCargo = cargoRepository.findByNome(associadoDto.getCargo());
+		BuildError.buildNotFoundException(optCargo, NOT_FOUND_CARGO);
+
 		Endereco endereco = new Endereco();
 		ViaCepObject viaCep = client.getEndereco(associadoDto.getCep());
 		endereco.setCep(associadoDto.getCep());
@@ -57,24 +68,22 @@ public class AssociadoService {
 		
 		pessoaRepository.save(pessoa);
 		
-		Cargo cargo = cargoRepository.findByNome(associadoDto.getCargo());
-		
 		Associado associado = new Associado();
 		associado.setRI(associadoDto.getRI());
 		associado.setStatus(StatusAssociado.ATIVO);
-		associado.setDataAdmissao(associadoDto.getAdmissao());
+		associado.setAdmissao(associadoDto.getAdmissao());
 		associado.setPadrinho(associadoDto.getPadrinho());
 		associado.setEmail(associadoDto.getEmail());
 		associado.setSenha(new BCryptPasswordEncoder().encode(associadoDto.getSenha()));
 		associado.setPessoa(pessoa);
-		associado.setCargo(cargo);
+		associado.setCargo(optCargo.get());
 		
 		associadoRepository.save(associado);
 		
 		return associado;
 	}
 
-	public List<Associado> findAssociado() {
+	public List<Associado> findAssociados() {
 		
 		List<Associado> associados = associadoRepository.findAll();
 		associados.remove(0);
@@ -84,15 +93,23 @@ public class AssociadoService {
 
 	public Associado findAssociado(Long ri) {
 		
-		Optional<Associado> associado = associadoRepository.findById(ri);
+		Optional<Associado> optAssociado = associadoRepository.findById(ri);
+		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
 
-		return associado.get();
+		return optAssociado.get();
 	}
 
 	public Associado updateAssociado(Long ri, AssociadoEditDto associadoEditDto) {
 
 		Optional<Associado> optAssociado = associadoRepository.findById(ri);
+		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
 		Associado associado = optAssociado.get();
+		
+		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo())) {
+			Optional<Cargo> optCargo = cargoRepository.findByNome(associadoEditDto.getCargo());
+			BuildError.buildNotFoundException(optCargo, NOT_FOUND_CARGO);
+			associado.setCargo(optCargo.get());
+		}
 		
 		if(!associado.getPessoa().getEndereco().getCep().equals(associadoEditDto.getCep())) {
 			associado.getPessoa().getEndereco().setCep(associadoEditDto.getCep());
@@ -108,13 +125,8 @@ public class AssociadoService {
 		associado.getPessoa().setNascimento(associadoEditDto.getNascimento());
 		associado.getPessoa().setTelefone(associadoEditDto.getTelefone());
 		
-		if(!associado.getCargo().getNome().equals(associadoEditDto.getCargo())) {
-			Cargo cargo = cargoRepository.findByNome(associadoEditDto.getCargo());
-			associado.setCargo(cargo);
-		}
-		
 		associado.setStatus(associadoEditDto.getStatus());
-		associado.setDataAdmissao(associadoEditDto.getAdmissao());
+		associado.setAdmissao(associadoEditDto.getAdmissao());
 		associado.setPadrinho(associadoEditDto.getPadrinho());
 		associado.setEmail(associadoEditDto.getEmail());
 		
@@ -124,7 +136,7 @@ public class AssociadoService {
 	}
 
 	public List<PessoaCargo> getByCargo() {
-		List<Pessoa> pessoa = pessoaRepository.findByCargo();
+		List<Pessoa> pessoa = pessoaRepository.findByCargoIn();
 		List<PessoaCargo> listPessoasCargo = new ArrayList<>();
 		pessoa.forEach(n -> {
 			PessoaCargo pessoaCargo = new PessoaCargo();
@@ -136,7 +148,9 @@ public class AssociadoService {
 	}
 
 	public boolean isValidAuthority(Long ri, String usuarioLogado) {
-		Associado associado = associadoRepository.findByEmail(usuarioLogado).get();
+		Optional<Associado> optAssociado = associadoRepository.findByEmail(usuarioLogado);
+		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
+		Associado associado = optAssociado.get();
 		if(associado.getCargo().getAcesso().getNome().equals("ADMIN")) {
 			return true;
 		}
@@ -146,10 +160,9 @@ public class AssociadoService {
 	public void deleteAssociado(Long ri) {
 
 		Optional<Associado> optAssociado = associadoRepository.findById(ri);
-		if(optAssociado.isPresent()) {
-			Associado associado = optAssociado.get();
-			associado.setStatus(StatusAssociado.DESLIGADO);
-			associadoRepository.save(associado);
-		}
+		BuildError.buildNotFoundException(optAssociado, NOT_FOUND_ASSOCIADO);
+		Associado associado = optAssociado.get();
+		associado.setStatus(StatusAssociado.DESLIGADO);
+		associadoRepository.save(associado);
 	}
 }

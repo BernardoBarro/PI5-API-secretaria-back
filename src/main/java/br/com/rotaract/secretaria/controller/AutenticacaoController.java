@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rotaract.secretaria.dto.LoginDto;
 import br.com.rotaract.secretaria.dto.TokenDto;
+import br.com.rotaract.secretaria.exceptions.UnauthorizedException;
 import br.com.rotaract.secretaria.service.TokenService;
 
 @RestController
@@ -37,7 +38,7 @@ public class AutenticacaoController {
 			String token = tokenService.gerarToken(authentication);
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		} catch (AuthenticationException e) {
-			throw e;
+			throw new UnauthorizedException("Não foi possivel realizar a autenticação");
 		}
 		
 	}

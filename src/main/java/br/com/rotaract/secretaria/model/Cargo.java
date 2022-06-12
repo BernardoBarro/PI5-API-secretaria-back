@@ -9,32 +9,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cargo")
+@Table(name = "CARGO")
 @Entity
 public class Cargo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_cargo")
+	@Column(name = "ID_CARGO")
 	private Long id;
 
-	@Column(name = "descricao_cargo")
+	@Column(name = "DESCRICAO_CARGO")
 	private String nome;
 
-//verificar
-	@JsonIgnore
-	@OneToOne(mappedBy = "cargo")
-	private Associado associado;
-
 	@OneToOne
-	@JoinColumn(name = "id_acesso", nullable = false)
+	@JoinColumn(name = "ID_ACESSO", nullable = false)
 	private Acesso acesso;
 
 	public Long getId() {
@@ -51,14 +44,6 @@ public class Cargo {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Associado getAssociado() {
-		return associado;
-	}
-
-	public void setAssociado(Associado associado) {
-		this.associado = associado;
 	}
 
 	public Acesso getAcesso() {

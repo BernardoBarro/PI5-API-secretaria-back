@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rotaract.secretaria.dto.ReuniaoDto;
-import br.com.rotaract.secretaria.dto.ReuniaoEditDto;
 import br.com.rotaract.secretaria.model.Reuniao;
 import br.com.rotaract.secretaria.repository.ReuniaoRepository;
+import br.com.rotaract.secretaria.utils.BuildError;
 
 @Service
 public class ReuniaoService {
+
+	private final static String NOT_FOUND = "A reunião não existe";
 	
 	@Autowired
 	private ReuniaoRepository reuniaoRepository;
@@ -29,31 +31,31 @@ public class ReuniaoService {
 		return reuniao;
 	}
 	
-	public List<Reuniao> FindReuniao(){
+	public List<Reuniao> findReunioes(){
 		
-		List<Reuniao> reuniao = reuniaoRepository.findAll();
-		
-		return reuniao;
+		return reuniaoRepository.findAll();
 	}
 	
-    public Reuniao findReuniao(Long id) {
+	public Reuniao findReuniao(Long id) {
 		
-		Optional<Reuniao> reuniao = reuniaoRepository.findById(id);
+		Optional<Reuniao> optReuniao = reuniaoRepository.findById(id);
+		BuildError.buildNotFoundException(optReuniao, NOT_FOUND);
 
-		return reuniao.get();
+		return optReuniao.get();
 	}
 	
 	
-	public Reuniao updateReuniao(Long id, ReuniaoEditDto reuniaoEditDto) {
+	public Reuniao updateReuniao(Long id, ReuniaoDto reuniaoDto) {
 
 		Optional<Reuniao> optReuniao = reuniaoRepository.findById(id);
+		BuildError.buildNotFoundException(optReuniao, NOT_FOUND);
 		Reuniao reuniao = optReuniao.get();
 		
 
-		reuniao.setAssunto(reuniaoEditDto.getAssunto());
-		reuniao.setNome(reuniaoEditDto.getNome());
-		reuniao.setLocal(reuniaoEditDto.getLocal());
-		reuniao.setDataReuniao(reuniaoEditDto.getDataReuniao());
+		reuniao.setAssunto(reuniaoDto.getAssunto());
+		reuniao.setNome(reuniaoDto.getNome());
+		reuniao.setLocal(reuniaoDto.getLocal());
+		reuniao.setDataReuniao(reuniaoDto.getDataReuniao());
 		
 		reuniaoRepository.save(reuniao);
 
@@ -63,8 +65,7 @@ public class ReuniaoService {
 	public void deleteReuniao(Long id) {
 
 		Optional<Reuniao> optReuniao = reuniaoRepository.findById(id);
-		if(optReuniao.isPresent()) {
-			reuniaoRepository.delete(optReuniao.get());
-		}
+		BuildError.buildNotFoundException(optReuniao, NOT_FOUND);
+		reuniaoRepository.delete(optReuniao.get());
 	}
 }

@@ -19,42 +19,33 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "pessoa")
+@Table(name = "PESSOA")
 @Entity
 public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pessoa")
+	@Column(name = "ID_PESSOA")
 	private Long id;
 
-	@Column(name = "nome")
+	@Column(name = "NOME")
 	private String nome;
 
-	@Column(name = "genero")
+	@Column(name = "GENERO")
 	private String genero;
 
-	@Column(name = "ocupacao")
+	@Column(name = "OCUPACAO")
 	private String ocupacao;
 
 	@JsonFormat(pattern = "dd-MM-yyyy")
-	@Column(name = "data_nascimento")
+	@Column(name = "DATA_NASCIMENTO")
 	private LocalDate nascimento;
 
-	@Column(name = "restricoes_medicas")
-	private String restricoesMedicas;
-
-	@Column(name = "telefone")
+	@Column(name = "TELEFONE")
 	private String telefone;
 
-	@Column(name = "cpf")
-	private String cpf;
-
-	@Column(name = "nome_cracha")
-	private String cracha;
-
 	@OneToOne
-	@JoinColumn(name = "id_endereco")
+	@JoinColumn(name = "ID_ENDERECO")
 	private Endereco endereco;
 
 	@JsonIgnore
@@ -101,36 +92,12 @@ public class Pessoa {
 		this.nascimento = nascimento;
 	}
 
-	public String getRestricoesMedicas() {
-		return restricoesMedicas;
-	}
-
-	public void setRestricoesMedicas(String restricoesMedicas) {
-		this.restricoesMedicas = restricoesMedicas;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCracha() {
-		return cracha;
-	}
-
-	public void setCracha(String cracha) {
-		this.cracha = cracha;
 	}
 
 	public Endereco getEndereco() {

@@ -14,3 +14,6 @@ autenticacao:
     
 cors:
   origin: http://localhost:8081
+  
+viacep:
+  url: https://viacep.com.br/ws

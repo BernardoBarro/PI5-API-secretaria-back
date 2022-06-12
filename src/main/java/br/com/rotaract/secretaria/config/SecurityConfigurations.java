@@ -58,7 +58,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.PUT, "/convidado/*", "/instituicao/*", "/patrocinador/*")
 			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO)
 			.antMatchers(HttpMethod.DELETE, "/**")
-			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE, SECRETARIO)
+			.hasAnyAuthority(ADMIN, PRESIDENTE, VICE_PRESIDENTE)
 			.anyRequest().authenticated()
 			.and().cors().and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

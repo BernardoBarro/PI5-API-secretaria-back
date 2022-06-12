@@ -6,18 +6,17 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="13_create_projeto_instituicoes_beneficiadas" author="Bernardo">
+	<changeSet id="13-insert-associado-admin" author="Bernardo">
 		<sql>
-			CREATE TABLE projeto_instituicoes_beneficiadas (
-			    id_projeto bigint NOT NULL,
-			    id_instituicao bigint NOT NULL,
-			    CONSTRAINT projeto_instituicoes_beneficiadas_un UNIQUE (id_projeto, id_instituicao)
-			);
-
+			INSERT INTO pessoa(id_pessoa, nome) VALUES (1, 'admin');
+			INSERT INTO associado(id_associado, id_cargo, id_pessoa, email, senha) VALUES (1, 12, 1, 'bernardobarro8@gmail.com', '$2a$10$h4o22w0aI3x3AsPpOeGBeutjWvz/9VGBZzOwsRuPvFhivosyT3j5a');
+			INSERT INTO associado_cargo(id_associado, id_cargo) VALUES (1, 12);
+			
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE projeto_instituicoes_beneficiadas;
+				DELETE FROM associado WHERE id_associado = 1;
+				DELETE FROM pessoa WHERE id_pessoa = 1;
 			</sql>
 		</rollback>
 	</changeSet>

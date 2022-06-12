@@ -12,22 +12,22 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "patrocinador")
+@Table(name = "PATROCINADOR")
 @Entity
 public class Patrocinador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_patrocinador")
+	@Column(name = "ID_PATROCINADOR")
 	private Long id;
 
-	@Column(name = "valor")
+	@Column(name = "VALOR")
 	private Double valorDecimal;
 
-	@Column(name = "Descricao")
+	@Column(name = "DESCRICAO")
 	private String descricao;
 
-	@Column(name = "nome_patrocinador")
+	@Column(name = "NOME_PATROCINADOR")
 	private String nome;
 
 	public Long getId() {

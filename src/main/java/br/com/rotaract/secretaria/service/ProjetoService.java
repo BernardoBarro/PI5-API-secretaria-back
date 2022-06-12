@@ -11,14 +11,17 @@ import br.com.rotaract.secretaria.dto.ProjetoDto;
 import br.com.rotaract.secretaria.dto.ProjetoEditDto;
 import br.com.rotaract.secretaria.model.Projeto;
 import br.com.rotaract.secretaria.repository.ProjetoRepository;
+import br.com.rotaract.secretaria.utils.BuildError;
 
 @Service
 public class ProjetoService {
 
+	private final static String NOT_FOUND = "O projeto não existe";
+
 	@Autowired
 	private ProjetoRepository projetoRepository;
 
-	public Projeto criacaoProjeto(ProjetoDto projetoDto) {
+	public Projeto createProjeto(ProjetoDto projetoDto) {
 
 		Projeto projeto = new Projeto();
 		projeto.setNome(projetoDto.getNome());
@@ -30,23 +33,23 @@ public class ProjetoService {
 		return projeto;
 	}
 
-	public List<Projeto> buscaProjetos() {
+	public List<Projeto> findProjetos() {
 		
-		List<Projeto> projetos = projetoRepository.findAll();		
-		
-		return projetos;
+		return projetoRepository.findAll();
 	}
 
-	public Projeto buscaProjeto(Long ri) {
+	public Projeto findProjeto(Long ri) {
 		
-		Optional<Projeto> projeto = projetoRepository.findById(ri);
+		Optional<Projeto> optProjeto = projetoRepository.findById(ri);
+		BuildError.buildNotFoundException(optProjeto, NOT_FOUND);
 
-		return projeto.get();
+		return optProjeto.get();
 	}
 
-	public Projeto atualizaProjeto(Long id, ProjetoEditDto projetoEditDto) {
+	public Projeto updateProjeto(Long id, ProjetoEditDto projetoEditDto) {
 
 		Optional<Projeto> optProjeto = projetoRepository.findById(id);
+		BuildError.buildNotFoundException(optProjeto, NOT_FOUND);
 		Projeto projeto = optProjeto.get();
 		
 		projeto.setNome(projetoEditDto.getNome());
@@ -61,10 +64,9 @@ public class ProjetoService {
 		public void deleteProjeto(Long id) {
 
 			Optional<Projeto> optProjeto = projetoRepository.findById(id);
-			if(optProjeto.isPresent()) {
-				Projeto projeto = optProjeto.get();
-				projeto.setStatus(StatusProjeto.CANCELADO);
-				projetoRepository.save(projeto);
-		}
+			BuildError.buildNotFoundException(optProjeto, NOT_FOUND);
+			Projeto projeto = optProjeto.get();
+			projeto.setStatus(StatusProjeto.CANCELADO);
+			projetoRepository.save(projeto);
 	}
 }

@@ -3,6 +3,8 @@ package br.com.rotaract.secretaria.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rotaract.secretaria.dto.ReuniaoDto;
-import br.com.rotaract.secretaria.dto.ReuniaoEditDto;
 import br.com.rotaract.secretaria.model.Reuniao;
 import br.com.rotaract.secretaria.service.ReuniaoService;
 
@@ -25,38 +26,35 @@ public class ReuniaoController {
 	private ReuniaoService service;
 
 	@PostMapping
-	public Reuniao createReuniao(@RequestBody ReuniaoDto reuniaoDto) {
+	public ResponseEntity<Reuniao> createReuniao(@RequestBody ReuniaoDto reuniaoDto) {
 		
-		return service.createReuniao(reuniaoDto);
-		
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.createReuniao(reuniaoDto));
 	}
 	
 	@GetMapping
-	public List<Reuniao> listReuniao() {
+	public ResponseEntity<List<Reuniao>> listReuniao() {
 		
-		return service.FindReuniao();
-		
+		return ResponseEntity.ok(service.findReunioes());
 	}
 	
 	@GetMapping("/{id}")
-	public Reuniao getReuniao(@PathVariable Long id) {
+	public ResponseEntity<Reuniao> getReuniao(@PathVariable Long id) {
 		
-		return service.findReuniao(id);
-		
+		return ResponseEntity.ok(service.findReuniao(id));
 	}
 	
 	@PutMapping("/{id}")
-	public Reuniao editReuniao(@PathVariable Long id, 
-			@RequestBody ReuniaoEditDto reuniaoEditDto) {
+	public ResponseEntity<Reuniao> editReuniao(@PathVariable Long id, 
+			@RequestBody ReuniaoDto reuniaoDto) {
 		
-		return service.updateReuniao(id, reuniaoEditDto);
-		
+		return ResponseEntity.ok(service.updateReuniao(id, reuniaoDto));
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteReuniao(@PathVariable Long id) {
+	public ResponseEntity<?> deleteReuniao(@PathVariable Long id) {
 
 		service.deleteReuniao(id);
 
+		return ResponseEntity.noContent().build();
 	}
 }

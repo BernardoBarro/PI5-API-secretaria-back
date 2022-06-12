@@ -6,17 +6,27 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="16-insert-associado-admin" author="Bernardo">
+	<changeSet id="09_create_associado" author="joao">
 		<sql>
-			insert into PESSOA(id_pessoa, nome) values (1, 'admin');
-			insert into ASSOCIADO(id_associado, id_cargo, id_pessoa, email, senha) values (1, 16, 1, 'bernardobarro8@gmail.com', '$2a$10$h4o22w0aI3x3AsPpOeGBeutjWvz/9VGBZzOwsRuPvFhivosyT3j5a');
-			insert into associado_cargo(id_associado, id_cargo) values (1, 16);
-			
+			CREATE TABLE associado (
+				id_associado BIGINT NOT NULL AUTO_INCREMENT,
+				id_cargo BIGINT,
+				id_pessoa BIGINT,
+				status_associado VARCHAR(25),
+				data_admissao DATE,
+				padrinho VARCHAR(50),
+				email VARCHAR(50),
+				senha VARCHAR(100),
+				PRIMARY KEY (id_associado),
+				FOREIGN KEY (id_cargo) REFERENCES CARGO(id_cargo) ON UPDATE CASCADE ON DELETE CASCADE,
+				FOREIGN KEY (id_pessoa) REFERENCES PESSOA(id_pessoa) ON UPDATE CASCADE ON DELETE CASCADE
+			);
+
+
 		</sql>
 		<rollback>
 			<sql>
-				DELETE FROM ASSOCIADO WHERE id_associado = 1;
-				DELETE FROM PESSOA WHERE id_pessoa = 1;
+				DROP TABLE associado;
 			</sql>
 		</rollback>
 	</changeSet>

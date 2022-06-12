@@ -6,13 +6,20 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="15-insert-cargo" author="Bernardo">
+	<changeSet id="07_create_instituicoes_beneficiadas" author="joao">
 		<sql>
-			insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (1, 'Admin');
+			CREATE TABLE instituicoes_beneficiadas (
+				id_instituicao BIGINT NOT NULL AUTO_INCREMENT,
+				nome_instituicao VARCHAR(50),
+				contato VARCHAR(11),
+				detalhes VARCHAR(255),
+				PRIMARY KEY (id_instituicao)
+			);
+
 		</sql>
 		<rollback>
 			<sql>
-				DELETE FROM CARGO WHERE ID_CARGO = 1;
+				DROP TABLE instituicoes_beneficiadas;
 			</sql>
 		</rollback>
 	</changeSet>

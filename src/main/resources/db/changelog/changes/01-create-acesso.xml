@@ -8,21 +8,21 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 	<changeSet id="01_create_acesso" author="joao">
 		<sql>
-			CREATE TABLE ACESSO (
-	ID_ACESSO BIGINT NOT NULL AUTO_INCREMENT,
-	TIPO_ACESSO VARCHAR(2000),
-	PRIMARY KEY (ID_ACESSO)
-); 
-		insert into ACESSO(TIPO_ACESSO) values ('ADMIN');
-		insert into ACESSO(TIPO_ACESSO) values ('PRESIDENTE');
-		insert into ACESSO(TIPO_ACESSO) values ('VICE-PRESIDENTE');
-		insert into ACESSO(TIPO_ACESSO) values ('SECRETARIO');
-		insert into ACESSO(TIPO_ACESSO) values ('ASSOCIADO');
+			CREATE TABLE acesso (
+				id_acesso BIGINT NOT NULL AUTO_INCREMENT,
+				tipo_acesso VARCHAR(255),
+				PRIMARY KEY (id_acesso)
+			);
+			INSERT INTO acesso(tipo_acesso) VALUES ('ADMIN');
+			INSERT INTO acesso(tipo_acesso) VALUES ('PRESIDENTE');
+			INSERT INTO acesso(tipo_acesso) VALUES ('VICE-PRESIDENTE');
+			INSERT INTO acesso(tipo_acesso) VALUES ('SECRETARIO');
+			INSERT INTO acesso(tipo_acesso) VALUES ('ASSOCIADO');
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE ACESSO;
+				DROP TABLE acesso;
 			</sql>
 		</rollback>
 	</changeSet>
