@@ -11,10 +11,10 @@ import br.com.rotaract.secretaria.model.Pessoa;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 	
-	@Query(value = "SELECT * FROM Pessoa P "
+	@Query(value = "SELECT distinct * FROM Pessoa P "
 			+ "INNER JOIN Associado A ON A.id_pessoa = P.id_pessoa "
 			+ "INNER JOIN Cargo C ON C.id_cargo = A.id_cargo "
 			+ "WHERE C.id_cargo IN (1, 2, 3)", nativeQuery= true)
-	public List<Pessoa> findByCargo ();
+	public List<Pessoa> findByCargoIn ();
 
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,35 +28,35 @@ public class PatrocinadorController {
 	private PatrocinadorService service;
 
 	@PostMapping
-	public Patrocinador createPatrocinador(@RequestBody @Valid PatrocinadorDto patrocinadorDto) {
+	public ResponseEntity<Patrocinador> createPatrocinador(@RequestBody @Valid PatrocinadorDto patrocinadorDto) {
 
-		return service.createPatrocinador(patrocinadorDto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.createPatrocinador(patrocinadorDto));
 	}
 	
 	@GetMapping
-	public List<Patrocinador> listPatrocinador() {
+	public ResponseEntity<List<Patrocinador>> listPatrocinador() {
 		
-		return service.findPatrocinador();	
+		return ResponseEntity.ok(service.findPatrocinadores());	
 	}
 	
 	@GetMapping("/{id}")
-	public Patrocinador getPatrocinador(@PathVariable Long id) {
+	public ResponseEntity<Patrocinador> getPatrocinador(@PathVariable Long id) {
 		
-		return service.findPatrocinador(id);
+		return ResponseEntity.ok(service.findPatrocinador(id));
 	}
 	
 	@PutMapping("/{id}")
-	public Patrocinador editPatrocinador(@PathVariable Long id, 
+	public ResponseEntity<Patrocinador> editPatrocinador(@PathVariable Long id, 
 			@RequestBody PatrocinadorDto patrocinadorEditDto) {
 		
-		return service.updatePatrocinador(id, patrocinadorEditDto);
-		
+		return ResponseEntity.ok(service.updatePatrocinador(id, patrocinadorEditDto));
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deletePatrocinador(@PathVariable Long id) {
+	public ResponseEntity<?> deletePatrocinador(@PathVariable Long id) {
 
 		service.deletePatrocinador(id);
 
+		return ResponseEntity.noContent().build();
 	}
 }

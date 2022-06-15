@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,34 +14,27 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "endereco")
+@Table(name = "ENDERECO")
 @Entity
 public class Endereco {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
-	@Column(name = "id_endereco")
+	@Column(name = "ID_ENDERECO")
 	private Long id;
 
-	@Column(name = "cidade")
+	@Column(name = "CIDADE")
 	private String cidade;
 
-	@Column(name = "rua")
+	@Column(name = "RUA")
 	private String rua;
 
-	@Column(name = "cep")
+	@Column(name = "CEP")
 	private String cep;
 
-	@Column(name = "numero")
-	private int numero;
-
-	@Column(name = "bairro")
+	@Column(name = "BAIRRO")
 	private String bairro;
-
-	@JsonIgnore
-	@OneToOne(mappedBy = "endereco")
-	private Pessoa pessoa;
 
 	public Long getId() {
 		return id;
@@ -76,28 +68,12 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
 	public String getBairro() {
 		return bairro;
 	}
 
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
 	}
 
 }

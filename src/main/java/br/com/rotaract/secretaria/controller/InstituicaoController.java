@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,39 +28,36 @@ public class InstituicaoController {
 	private InstituicaoService service;
 
 	@PostMapping
-	public Instituicao createInstituicao(@RequestBody @Valid InstituicaoDto instituicaoDto) {
+	public ResponseEntity<Instituicao> createInstituicao(@RequestBody @Valid InstituicaoDto instituicaoDto) {
 
-		return service.createInstituicao(instituicaoDto);
-
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.createInstituicao(instituicaoDto));
 	}
 
 	@GetMapping
-	public List<Instituicao> listInstituicao() {
+	public ResponseEntity<List<Instituicao>> listInstituicao() {
 		
-		return service.findInstituicao();
-		
+		return ResponseEntity.ok(service.findInstituicoes());
 	}
 	
 	@GetMapping("/{ri}")
-	public Instituicao getInstituicao(@PathVariable Long ri) {
+	public ResponseEntity<Instituicao> getInstituicao(@PathVariable Long ri) {
 		
-		return service.findInstituicao(ri);
-		
+		return ResponseEntity.ok(service.findInstituicao(ri));
 	}
 	
 	@PutMapping("/{ri}")
-	public Instituicao editInstituicao(@PathVariable Long ri, 
+	public ResponseEntity<Instituicao> editInstituicao(@PathVariable Long ri, 
 			@RequestBody InstituicaoDto instituicaoEditDto) {
 
-		return service.updateInstituicao(ri, instituicaoEditDto);
-
+		return ResponseEntity.ok(service.updateInstituicao(ri, instituicaoEditDto));
 	}
 	
 	@DeleteMapping("/{ri}")
-	public void deleteInstituicao(@PathVariable Long ri) {
+	public ResponseEntity<?> deleteInstituicao(@PathVariable Long ri) {
 		
 		service.deleteInstituicao(ri);
 		
+		return ResponseEntity.noContent().build();
 	}
 
 }

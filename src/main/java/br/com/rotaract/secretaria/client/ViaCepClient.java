@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.rotaract.secretaria.dto.ViaCepObject;
 
-@FeignClient(name="ViaCep", url="https://viacep.com.br/ws")
+@FeignClient(name="ViaCep", url="${viacep.url}")
 public interface ViaCepClient {
 
 	@GetMapping(value = "/{cep}/json/", consumes = MediaType.APPLICATION_JSON_VALUE)

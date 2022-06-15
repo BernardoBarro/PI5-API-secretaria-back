@@ -1,6 +1,7 @@
 package br.com.rotaract.secretaria.filter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.repository.AssociadoRepository;
 import br.com.rotaract.secretaria.service.TokenService;
+import br.com.rotaract.secretaria.utils.BuildError;
 
 public class AutenticacaoTokenFilter extends OncePerRequestFilter{
 
@@ -40,8 +42,9 @@ public class AutenticacaoTokenFilter extends OncePerRequestFilter{
 
 	private void autenticarAssociado(String token) {
 		Long idAssociado = tokenService.getIdAssociado(token);
-		Associado associado = associadoRepository.findById(idAssociado).get();
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(associado, null, associado.getAuthorities());
+		Optional<Associado> optAssociado = associadoRepository.findById(idAssociado);
+		BuildError.buildNotFoundException(optAssociado, "O associado não existe");
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(optAssociado.get(), null, optAssociado.get().getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 

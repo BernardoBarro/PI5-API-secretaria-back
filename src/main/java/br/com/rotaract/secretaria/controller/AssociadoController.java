@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.rotaract.secretaria.dto.AssociadoDto;
 import br.com.rotaract.secretaria.dto.AssociadoEditDto;
 import br.com.rotaract.secretaria.dto.PessoaCargo;
+import br.com.rotaract.secretaria.exceptions.UnauthorizedException;
 import br.com.rotaract.secretaria.model.Associado;
 import br.com.rotaract.secretaria.service.AssociadoService;
 
@@ -32,31 +33,31 @@ public class AssociadoController {
 	private AssociadoService service;
 
 	@PostMapping
-	public Associado createAssociado(@RequestBody @Valid AssociadoDto associadoDto) {
+	public ResponseEntity<Associado> createAssociado(@RequestBody @Valid AssociadoDto associadoDto) {
 		
-		return service.createAssociado(associadoDto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.createAssociado(associadoDto));
 	}
 	
 	@GetMapping
-	public List<Associado> getAllAssociados() {
+	public ResponseEntity<List<Associado>> getAllAssociados() {
 		
-		return service.findAssociado();
+		return ResponseEntity.ok(service.findAssociados());
 	}
 	
 	@GetMapping("/{ri}")
-	public Associado getById(@PathVariable Long ri) {
+	public ResponseEntity<Associado> getById(@PathVariable Long ri) {
 		
-		return service.findAssociado(ri);
+		return ResponseEntity.ok(service.findAssociado(ri));
 	}
 	
 	@GetMapping("/cargo")
-	public List<PessoaCargo> getByCargo() {
+	public ResponseEntity<List<PessoaCargo>> getByCargo() {
 
-		return service.getByCargo();
+		return ResponseEntity.ok(service.getByCargo());
 	}
 	
 	@PutMapping("/{ri}")
-	public ResponseEntity<?> updateAssociado(@PathVariable Long ri, 
+	public ResponseEntity<Associado> updateAssociado(@PathVariable Long ri, 
 			@RequestBody AssociadoEditDto associadoEditDto) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String usuarioLogado = ((UserDetails)principal).getUsername();
@@ -64,13 +65,15 @@ public class AssociadoController {
 			Associado associado = service.updateAssociado(ri, associadoEditDto);
 			return ResponseEntity.ok().body(new Associado(associado));
 		}
-		return new ResponseEntity<String>("Você não tem permissão", HttpStatus.FORBIDDEN);
+		throw new UnauthorizedException("Você não tem permissão");
 	}
 	
 	@DeleteMapping("/{ri}")
-	public void deleteAssociado(@PathVariable Long ri) {
+	public ResponseEntity<?> deleteAssociado(@PathVariable Long ri) {
 		
 		service.deleteAssociado(ri);
+		
+		return ResponseEntity.noContent().build();
 	}
 	
 }

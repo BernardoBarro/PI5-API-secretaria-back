@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,40 +29,37 @@ public class ConvidadoController {
 	private ConvidadoService service;
 
 	@PostMapping
-	public Convidado createConvidado(@RequestBody @Valid ConvidadoDto convidadoDto) {
+	public ResponseEntity<Convidado> createConvidado(@RequestBody @Valid ConvidadoDto convidadoDto) {
 
-		return service.createConvidado(convidadoDto);
-
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.createConvidado(convidadoDto));
 	}
 
 	@GetMapping
-	public List<Convidado> listConvidado() {
+	public ResponseEntity<List<Convidado>> listConvidado() {
 		
-		return service.findConvidado();
-		
+		return ResponseEntity.ok(service.findConvidados());
 	}
 	
 	@GetMapping("/{id}")
-	public Convidado getConvidado(@PathVariable Long id) {
+	public ResponseEntity<Convidado> getConvidado(@PathVariable Long id) {
 		
-		return service.findConvidado(id);
-		
+		return ResponseEntity.ok(service.findConvidado(id));
 	}
 	
 	 
 	@PutMapping("/{id}")
-	public Convidado editConvidado(@PathVariable Long id, 
+	public ResponseEntity<Convidado> editConvidado(@PathVariable Long id, 
 			@RequestBody ConvidadoDto convidadoEditDto) {
 
-		return service.updateConvidado(id, convidadoEditDto);
-
+		return ResponseEntity.ok(service.updateConvidado(id, convidadoEditDto));
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteConvidado(@PathVariable Long id) {
+	public ResponseEntity<?> deleteConvidado(@PathVariable Long id) {
 
 		service.deleteConvidado(id);
-
+		
+		return ResponseEntity.noContent().build();
 	}
 
 }

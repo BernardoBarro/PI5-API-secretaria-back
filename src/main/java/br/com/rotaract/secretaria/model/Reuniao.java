@@ -14,26 +14,26 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "reuniao")
+@Table(name = "REUNIAO")
 @Entity
 
 public class Reuniao{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_reuniao")
+	@Column(name = "ID_REUNIAO")
 	private Long id;
 
-	@Column(name = "data_reuniao")
+	@Column(name = "DATA_REUNIAO")
 	private LocalDate dataReuniao;
 
-	@Column(name = "assunto")
+	@Column(name = "ASSUNTO")
 	private String assunto;
 	
-	@Column(name = "nome")
+	@Column(name = "NOME")
 	private String nome;
 	
-	@Column(name = "local")
+	@Column(name = "LOCAL")
 	private String local;
 	
 	public Long getId() {

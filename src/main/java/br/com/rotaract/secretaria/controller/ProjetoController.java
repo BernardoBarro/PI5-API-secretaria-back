@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,38 +29,36 @@ public class ProjetoController {
 	private ProjetoService service;
 
 	@PostMapping
-	public Projeto criacaoProjeto(@RequestBody @Valid ProjetoDto projetoDto) {
+	public ResponseEntity<Projeto> criacaoProjeto(@RequestBody @Valid ProjetoDto projetoDto) {
 		
-		return service.criacaoProjeto(projetoDto);
-		
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.createProjeto(projetoDto));
 	}
 	
 	@GetMapping
-	public List<Projeto> getAllProjeto() {
+	public ResponseEntity<List<Projeto>> getAllProjeto() {
 		
-		return service.buscaProjetos();
-		
+		return ResponseEntity.ok(service.findProjetos());
 	}
 	
 	@GetMapping("/{id}")
-	public Projeto getByProjeto(@PathVariable Long id) {
+	public ResponseEntity<Projeto> getByProjeto(@PathVariable Long id) {
 		
-		return service.buscaProjeto(id);
-		
+		return ResponseEntity.ok(service.findProjeto(id));
 	}
 	
 	@PutMapping("/{id}")
-	public Projeto atualizaProjeto(@PathVariable Long id, 
+	public ResponseEntity<Projeto> atualizaProjeto(@PathVariable Long id, 
 			@RequestBody ProjetoEditDto projetoEditDto) {
 		
-		return service.atualizaProjeto(id, projetoEditDto);
-		
+		return ResponseEntity.ok(service.updateProjeto(id, projetoEditDto));
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteProjeto(@PathVariable Long id) {
+	public ResponseEntity<?> deleteProjeto(@PathVariable Long id) {
 		
 		service.deleteProjeto(id);
+		
+		return ResponseEntity.noContent().build();
 	}
 	
 }

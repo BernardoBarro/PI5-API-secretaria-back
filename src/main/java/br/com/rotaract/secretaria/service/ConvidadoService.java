@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import br.com.rotaract.secretaria.dto.ConvidadoDto;
 import br.com.rotaract.secretaria.model.Convidado;
 import br.com.rotaract.secretaria.repository.ConvidadoRepository;
+import br.com.rotaract.secretaria.utils.BuildError;
 
 @Service
 public class ConvidadoService {
 
+	private final static String NOT_FOUND = "O convidado não existe";
 	
 	@Autowired
 	private ConvidadoRepository convidadoRepository;
@@ -26,25 +28,23 @@ public class ConvidadoService {
 		return convidado;
 	}
 	
-	
-	public List<Convidado> findConvidado() {
+	public List<Convidado> findConvidados() {
 		
-		List<Convidado> convidado = convidadoRepository.findAll();		
-		
-		return convidado;
+		return convidadoRepository.findAll();
 	}
 
 	public Convidado findConvidado(Long id) {
 		
-		Optional<Convidado> convidado = convidadoRepository.findById(id);
+		Optional<Convidado> optConvidado = convidadoRepository.findById(id);
+		BuildError.buildNotFoundException(optConvidado, NOT_FOUND);
 
-		return convidado.get();
+		return optConvidado.get();
 	}
-	
 	
 	public Convidado updateConvidado(Long id, ConvidadoDto convidadoDto) {
 
 		Optional<Convidado> optConvidado = convidadoRepository.findById(id);
+		BuildError.buildNotFoundException(optConvidado, NOT_FOUND);
 		Convidado convidado = optConvidado.get();
 		convidado.setNome(convidadoDto.getNome());
 		convidado.setContato(convidadoDto.getContato());
@@ -57,10 +57,7 @@ public class ConvidadoService {
 	public void deleteConvidado(Long id) {
 
 		Optional<Convidado> optConvidado = convidadoRepository.findById(id);
-		if(optConvidado.isPresent()) {
-			convidadoRepository.delete(optConvidado.get());
-		}
+		BuildError.buildNotFoundException(optConvidado, NOT_FOUND);
+		convidadoRepository.delete(optConvidado.get());
 	}
 }
-
-

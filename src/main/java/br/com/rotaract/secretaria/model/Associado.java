@@ -17,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.rotaract.secretaria.constant.StatusAssociado;
 import lombok.AllArgsConstructor;
@@ -24,47 +25,50 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "associado")
+@Table(name = "ASSOCIADO")
 @Entity
 public class Associado implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id_associado")
+	@Column(name = "ID_ASSOCIADO")
 	private Long RI;
 
-	@Column(name = "status_associado")
+	@Column(name = "STATUS_ASSOCIADO")
 	private StatusAssociado status;
 
 	@JsonFormat(pattern = "dd-MM-yyyy")
-	@Column(name = "data_admissao")
-	private LocalDate dataAdmissao;
+	@Column(name = "DATA_ADMISSAO")
+	private LocalDate admissao;
 
-	@Column(name = "padrinho")
+	@Column(name = "PADRINHO")
 	private String padrinho;
-	
-	@Column(name = "email")
+
+	@Column(name = "EMAIL")
 	private String email;
-	
-	@Column(name = "senha")
+
+	@JsonIgnore
+	@Column(name = "SENHA")
 	private String senha;
 
 	@OneToOne
-	@JoinColumn(name = "id_pessoa", nullable = false)
+	@JoinColumn(name = "ID_PESSOA", nullable = false)
 	private Pessoa pessoa;
 
 	@ManyToOne
-	@JoinTable(name = "associado_cargo", joinColumns = @JoinColumn(name = "id_associado", referencedColumnName = "id_associado"), inverseJoinColumns = @JoinColumn(name = "id_cargo", referencedColumnName = "id_cargo"))
+	@JoinTable(name = "ASSOCIADO_CARGO", 
+		joinColumns = @JoinColumn(name = "ID_ASSOCIADO", referencedColumnName = "ID_ASSOCIADO"), 
+		inverseJoinColumns = @JoinColumn(name = "ID_CARGO", referencedColumnName = "ID_CARGO"))
 	private Cargo cargo;
 
 	public Associado() {
 	}
-	
+
 	public Associado(Associado associado) {
 		this.RI = associado.getRI();
 		this.status = associado.getStatus();
-		this.dataAdmissao = associado.getDataAdmissao();
+		this.admissao = associado.getAdmissao();
 		this.padrinho = associado.getPadrinho();
 		this.email = associado.getEmail();
 		this.senha = associado.getSenha();
@@ -72,36 +76,43 @@ public class Associado implements UserDetails {
 		this.cargo = associado.getCargo();
 	}
 
+	@JsonIgnore
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(this.cargo.getAcesso());
 	}
 
+	@JsonIgnore
 	@Override
 	public String getPassword() {
 		return this.senha;
 	}
 
+	@JsonIgnore
 	@Override
 	public String getUsername() {
 		return this.email;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isEnabled() {
 		return true;
@@ -123,12 +134,12 @@ public class Associado implements UserDetails {
 		this.status = ativo;
 	}
 
-	public LocalDate getDataAdmissao() {
-		return dataAdmissao;
+	public LocalDate getAdmissao() {
+		return admissao;
 	}
 
-	public void setDataAdmissao(LocalDate dataAdmissao) {
-		this.dataAdmissao = dataAdmissao;
+	public void setAdmissao(LocalDate admissao) {
+		this.admissao = admissao;
 	}
 
 	public String getPadrinho() {

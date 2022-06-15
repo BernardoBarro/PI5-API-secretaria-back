@@ -6,22 +6,21 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="05_create_endereco" author="joao">
+	<changeSet id="08_create_reuniao" author="joao">
 		<sql>
-			CREATE TABLE ENDERECO (
-			ID_ENDERECO BIGINT NOT NULL AUTO_INCREMENT,
-		    CIDADE VARCHAR(50),
-		    RUA VARCHAR(50),
-		    CEP VARCHAR(8),
-		    NUMERO INT,
-		    BAIRRO VARCHAR(50),
-			PRIMARY KEY (ID_ENDERECO)
-		);
+			CREATE TABLE reuniao (
+				id_reuniao BIGINT NOT NULL AUTO_INCREMENT,
+				data_reuniao TIMESTAMP,
+				assunto VARCHAR(1000),
+				nome VARCHAR(50),
+				local VARCHAR(200),
+				PRIMARY KEY (id_reuniao)
+			);
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE ENDERECO;
+				DROP TABLE reuniao;
 			</sql>
 		</rollback>
 	</changeSet>

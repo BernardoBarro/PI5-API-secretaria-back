@@ -8,32 +8,28 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 	<changeSet id="02_create_cargo" author="joao">
 		<sql>
-			CREATE TABLE CARGO(
-			ID_CARGO BIGINT NOT NULL AUTO_INCREMENT,
-			ID_ACESSO BIGINT,
-			DESCRICAO_CARGO VARCHAR(2000),
-			PRIMARY KEY (ID_CARGO),
-		FOREIGN KEY (ID_ACESSO) REFERENCES ACESSO(ID_ACESSO) ON UPDATE CASCADE ON DELETE CASCADE
-		); 
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (2, 'Presidente');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (3, 'Vice-Presidente');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (4, 'Secretário');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Tesoureiro');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Protocolo');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Comunidade');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Internos');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Imagem Pública');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Finanças');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Internacionais');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'DQA');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Jurídico');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Diversidade, Equidade e Inclusão');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Profissionais');
-		insert into CARGO(ID_ACESSO, DESCRICAO_CARGO) values (5, 'Associado');
+			CREATE TABLE cargo(
+				id_cargo BIGINT NOT NULL AUTO_INCREMENT,
+				id_acesso BIGINT,
+				descricao_cargo VARCHAR(255),
+				PRIMARY KEY (id_cargo),
+				FOREIGN KEY (id_acesso) REFERENCES acesso(id_acesso) ON UPDATE CASCADE ON DELETE CASCADE
+			); 
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (2, 'Presidente');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (3, 'Vice-Presidente');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (4, 'Secretário');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Tesoureiro');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Protocolo');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Comunidade');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Internos');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Imagem Pública');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Finanças');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Internacionais');
+			INSERT INTO cargo(id_acesso, descricao_cargo) VALUES (5, 'Associado');
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE CARGO;
+				DROP TABLE cargo;
 			</sql>
 		</rollback>
 	</changeSet>

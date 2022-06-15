@@ -9,9 +9,3 @@ import br.com.rotaract.secretaria.model.Reuniao;
 public interface ReuniaoRepository extends JpaRepository<Reuniao, Long> {
 
 }
-
-
-
-
-
-

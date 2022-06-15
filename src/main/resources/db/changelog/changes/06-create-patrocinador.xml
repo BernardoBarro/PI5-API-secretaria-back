@@ -6,18 +6,20 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-	<changeSet id="14_create_projeto_associado" author="Bernardo">
+	<changeSet id="06_create_patrocinador" author="joao">
 		<sql>
-			CREATE TABLE projeto_associado (
-			    id_projeto bigint NOT NULL,
-			    id_associado bigint NOT NULL,
-			    CONSTRAINT projeto_associado_un UNIQUE (id_projeto, id_associado)
+			CREATE TABLE patrocinador (
+				id_patrocinador BIGINT NOT NULL AUTO_INCREMENT,
+				valor DECIMAL(15,2),
+				descricao VARCHAR(2000),
+				nome_patrocinador VARCHAR(50),
+				PRIMARY KEY (id_patrocinador)
 			);
 
 		</sql>
 		<rollback>
 			<sql>
-				DROP TABLE projeto_associado;
+				DROP TABLE patrocinador;
 			</sql>
 		</rollback>
 	</changeSet>

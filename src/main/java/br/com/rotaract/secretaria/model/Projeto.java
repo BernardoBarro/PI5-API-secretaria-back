@@ -15,25 +15,25 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "projeto")
+@Table(name = "PROJETO")
 @Entity
 public class Projeto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_projeto")
+	@Column(name = "ID_PROJETO")
 	private Long id;
 
-	@Column(name = "nome_projeto")
+	@Column(name = "NOME_PROJETO")
 	private String nome;
 
-	@Column(name = "descricao_projeto")
+	@Column(name = "DESCRICAO_PROJETO")
 	private String descricao;
 
-	@Column(name = "data_inicio")
+	@Column(name = "DATA_INICIO")
 	private LocalDate dataInicio;
 
-	@Column(name = "status_projeto")
+	@Column(name = "STATUS_PROJETO")
 	private StatusProjeto status;
 
 	public Long getId() {

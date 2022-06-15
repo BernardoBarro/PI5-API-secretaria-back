@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import br.com.rotaract.secretaria.dto.InstituicaoDto;
 import br.com.rotaract.secretaria.model.Instituicao;
 import br.com.rotaract.secretaria.repository.InstituicaoRepository;
+import br.com.rotaract.secretaria.utils.BuildError;
 
 @Service
 public class InstituicaoService {
 
+	private final static String NOT_FOUND = "A instituição não existe";
 	
 	@Autowired
 	private InstituicaoRepository instituicaoRepository;
@@ -28,25 +30,23 @@ public class InstituicaoService {
 		return instituicao;
 	}
 	
-	
-	public List<Instituicao> findInstituicao() {
+	public List<Instituicao> findInstituicoes() {
 		
-		List<Instituicao> instituicoes = instituicaoRepository.findAll();		
-		
-		return instituicoes;
+		return instituicaoRepository.findAll();
 	}
 
 	public Instituicao findInstituicao(Long ri) {
 		
-		Optional<Instituicao> instituicao = instituicaoRepository.findById(ri);
+		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
+		BuildError.buildNotFoundException(optInstituicao, NOT_FOUND);
 
-		return instituicao.get();
+		return optInstituicao.get();
 	}
-	
 	
 	public Instituicao updateInstituicao(Long ri, InstituicaoDto instituicaoDto) {
 
 		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
+		BuildError.buildNotFoundException(optInstituicao, NOT_FOUND);
 		Instituicao instituicao = optInstituicao.get();
 
 		instituicao.setNome(instituicaoDto.getNome());
@@ -58,13 +58,11 @@ public class InstituicaoService {
 		return instituicao;
 	}
 
-
 	public void deleteInstituicao(Long ri) {
 		
 		Optional<Instituicao> optInstituicao = instituicaoRepository.findById(ri);
-		if(optInstituicao.isPresent()) {
-			instituicaoRepository.delete(optInstituicao.get());
-		}
+		BuildError.buildNotFoundException(optInstituicao, NOT_FOUND);
+		instituicaoRepository.delete(optInstituicao.get());
 	}
 
 }

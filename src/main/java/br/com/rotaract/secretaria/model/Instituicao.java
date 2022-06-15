@@ -12,19 +12,19 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "instituicoes_beneficiadas")
+@Table(name = "INSTITUICOES_BENEFICIADAS")
 @Entity
 public class Instituicao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_instituicao")
+	@Column(name = "ID_INSTITUICAO")
 	private Long id;
 
-	@Column(name = "nome_instituicao")
+	@Column(name = "NOME_INSTITUICAO")
 	private String nome;
 
-	@Column(name = "Contato")
+	@Column(name = "CONTATO")
 	private String contato;
 
 	@Column(name = "DETALHES")
