@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.rotaract.secretaria.constant.StatusProjeto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,7 @@ public class Projeto {
 	@Column(name = "DESCRICAO_PROJETO")
 	private String descricao;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "DATA_INICIO")
 	private LocalDate dataInicio;
 

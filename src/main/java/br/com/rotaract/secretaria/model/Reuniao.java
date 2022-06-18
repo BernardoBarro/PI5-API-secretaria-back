@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +26,7 @@ public class Reuniao{
 	@Column(name = "ID_REUNIAO")
 	private Long id;
 
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "DATA_REUNIAO")
 	private LocalDate dataReuniao;
 
