@@ -1,5 +1,7 @@
 # API-secretaria-back
 
+The idea of ​​the project is to be a website to facilitate the management of the Rotaract Club secretary
+
 # Rodar
 Criar um banco chamado `secretariartc` no banco MySQL e adicionar o usuário e senha no arquivo application.yml
 
